@@ -189,6 +189,6 @@ const validateEmail = (val) => {
 .book-btn {
   width: 295px;
   height: 50.14px;
-  background: rgb(211, 15, 15);
+  background: #fc002b;
 }
 </style>

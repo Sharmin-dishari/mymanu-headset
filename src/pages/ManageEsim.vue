@@ -106,7 +106,7 @@ import QFooter from "../components/QFooter.vue";
   width: 295px;
   height: 50.14px;
   border-radius: 15px;
-  background: rgb(211, 15, 15);
+  background: #fc002b;
 }
 .btnBorder {
   width: 38px;

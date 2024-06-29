@@ -1,5 +1,6 @@
 <template>
-  <q-page class="">
+  <q-page class="bg-grey-2">
+    <q-header class="bg-grey-2 text-black q-pa-md"></q-header>
     <div class="text-h4 q-px-md text-center text-bold text-black">
       Explore Premium
     </div>
@@ -15,7 +16,9 @@
         <div class="text-center q-py-md">
           <q-btn class="book-btn q-mt-lg" no-caps @click="addDevice = true">
             <div class="row text-white">
-              <div class="q-mt-xs text-bold">Add a device</div>
+              <div class="q-mt-xs text-subtitle1 text-weight-medium">
+                Add a device
+              </div>
               <div class="q-ml-md">
                 <q-btn
                   round
@@ -23,7 +26,7 @@
                   size="sm"
                   text-black
                   unelevated
-                  color="red"
+                  color="red-5"
                   class="text-white"
                 />
               </div>
@@ -94,12 +97,12 @@ const videoList = ref(["https://www.youtube.com/embed/k3_tw44QsZQ?rel=0"]);
 const addDevice = ref(false);
 </script>
 
-<style>
+<style scoped>
 .book-btn {
   width: 295px;
   height: 50.14px;
   border-radius: 15px;
-  background: rgb(226, 25, 25);
+  background: #fc002b;
 }
 .horizontal-scroll-container {
   overflow-x: auto;

@@ -72,7 +72,14 @@
             rounded
             v-close-popup
           />
-          <q-btn label="Add" class="q-px-xl" color="red" rounded no-caps />
+          <q-btn
+            label="Add"
+            @click="$router.push({ name: 'device-index' })"
+            class="q-px-xl"
+            color="red"
+            rounded
+            no-caps
+          />
         </q-card-actions>
       </q-card>
     </q-dialog>

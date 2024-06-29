@@ -192,4 +192,3 @@ const validateEmail = (val) => {
   background: rgb(211, 15, 15);
 }
 </style>
-src/stores/firebase.js

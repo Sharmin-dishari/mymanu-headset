@@ -14,6 +14,21 @@ const routes = [
         component: () => import("pages/DashboardIndex.vue"),
       },
       {
+        path: "device-index",
+        name: "device-index",
+        component: () => import("pages/DeviceIndex.vue"),
+      },
+      {
+        path: "manage-esim",
+        name: "manage-esim",
+        component: () => import("pages/ManageEsim.vue"),
+      },
+      {
+        path: "esim-details",
+        name: "esim-details",
+        component: () => import("pages/EsimDetails.vue"),
+      },
+      {
         path: "",
         component: () => import("pages/SignIndex.vue"),
       },

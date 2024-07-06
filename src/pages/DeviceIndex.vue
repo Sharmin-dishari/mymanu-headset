@@ -13,7 +13,13 @@
         </div>
         <div class="text-center text-h6 q-mt-xs">My Device</div>
         <div>
-          <q-btn icon="menu" outline="" color="text-grey-6" round />
+          <q-btn
+            icon="menu"
+            @click="$router.push({ name: 'settings-index' })"
+            outline=""
+            color="text-grey-6"
+            round
+          />
         </div>
       </div>
     </q-header>
@@ -100,7 +106,10 @@
           </div>
           <div>Update Wallpaper</div>
         </q-card>
-        <q-card class="mycard q-pa-sm">
+        <q-card
+          class="mycard q-pa-sm"
+          @click="$router.push({ name: 'settings-index' })"
+        >
           <div class="row justify-between">
             <div class="q-ma-xs q-mb-lg">
               <q-btn square class="btnBorder" color="grey-2" unelevated>

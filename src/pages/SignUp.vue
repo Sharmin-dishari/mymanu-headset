@@ -14,7 +14,7 @@
       <q-card-section>
         <div>
           <q-input
-            v-model="form.displayName"
+            v-model="form.name"
             class="itc-input required"
             stack-label
             outlined
@@ -51,7 +51,7 @@
             :type="isPwd ? 'password' : 'text'"
             :rules="[
               (val) => !!val || 'Password is required',
-              (val) => val.length >= 6 || 'Minimum 6 characters required',
+              (val) => val.length >= 8 || 'Minimum 8 characters required',
             ]"
           >
             <template #prepend> <q-icon name="lock" /></template>
@@ -72,7 +72,7 @@
             :type="confirm_password ? 'password' : 'text'"
             :rules="[
               (val) => !!val || 'Password is required',
-              (val) => val.length >= 6 || 'Minimum 6 characters required',
+              (val) => val.length >= 8 || 'Minimum 8 characters required',
             ]"
           >
             <template #prepend> <q-icon name="lock" /></template>
@@ -125,7 +125,7 @@ const confirm_password = ref(true);
 const isPwd = ref(true);
 const form = ref({
   email: "",
-  displayName: "",
+  name: "",
   password: "",
   confirm_password: "",
 });
@@ -138,11 +138,14 @@ const validateEmail = (val) => {
 };
 
 const signUp = () => {
-  const form = {
+  const payload = {
     email: form.value.email,
+    name: form.value.name,
     password: form.value.password,
+    application_type: "personal",
+    device_type: "headset",
   };
-  commonStore.UserRegister(form.value);
+  commonStore.UserRegister(payload);
 };
 </script>
 

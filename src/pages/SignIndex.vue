@@ -58,7 +58,7 @@
             <q-toggle
               size="md"
               @update:model-value="darkMode = !darkMode"
-              v-model="darkMode"
+              v-model="isRemember"
               val="dark"
             />
             <div class="q-mt-sm">Remember Me</div>
@@ -172,11 +172,27 @@ const isPwd = ref(true);
 const form = ref({
   email: null,
   password: null,
+  application_type: "personal",
+  device_type: "headset",
 });
+const isRemember = ref(true);
 const userEmail = ref(null);
-const handleLogin = () => {
-  commonStore.UserLogin(form.value);
-  router.push({ name: "dashboard-index" });
+const handleLogin = async () => {
+  const res = await commonStore.UserLogin(form.value);
+  console.log(res.data.data);
+  if (data.email) {
+    router.push({ name: "dashboard-index" });
+  }
+};
+const handleForgotPassword = () => {
+  commonStore.ForgotPassword({ email: userEmail.value });
+  $q.notify({
+    message: "Password reset link has been sent to your email.",
+    color: "green-4",
+    textColor: "white",
+    icon: "cloud_done",
+  });
+  showModal.value = false;
 };
 const router = useRouter();
 

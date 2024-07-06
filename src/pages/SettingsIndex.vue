@@ -1,11 +1,19 @@
 <template>
   <q-page class="bg-grey-2">
-    <q-header class="bg-white text-black q-pa-md"> </q-header>
-    <q-card>
+    <q-header class="bg-grey-2 text-black q-pa-md">
+      <div
+        class="cursor-pointer"
+        @click="$router.back()"
+        v-if="$q.screen.lt.sm"
+      >
+        <q-icon name="arrow_back" size="md" /></div
+    ></q-header>
+    <q-card flat>
       <q-tabs
         v-model="tab"
         dense
-        class="text-grey q-mx-sm"
+        flat
+        class="text-grey q-px-sm bg-grey-2"
         active-color="primary"
         indicator-color="primary"
         align="justify"
@@ -18,10 +26,10 @@
 
       <q-separator />
 
-      <q-tab-panels v-model="tab" animated class="q-pa-md">
+      <q-tab-panels v-model="tab" animated class="q-pa-md bg-grey-2">
         <q-tab-panel name="name">
           <q-form @submit="onSuonSubmitNamebmit">
-            <div class="text-h6">Name</div>
+            <div class="text-h6">Update Name</div>
             <div>
               <q-input
                 v-model="form.name"
@@ -45,7 +53,7 @@
         </q-tab-panel>
 
         <q-tab-panel name="email" class="q-pa-md">
-          <div class="text-h6">Email</div>
+          <div class="text-h6">Update Email</div>
           <q-form @submit="onSubmitEmail">
             <div>
               <q-input
@@ -73,7 +81,7 @@
           </q-form>
         </q-tab-panel>
         <q-tab-panel name="password" class="q-pa-md">
-          <div class="text-h6">Password</div>
+          <div class="text-h6">Update Password</div>
           <q-form @submit="onSubmitPassword">
             <q-input
               v-model="form.password"

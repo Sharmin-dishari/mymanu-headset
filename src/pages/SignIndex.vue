@@ -161,12 +161,13 @@
 </template>
 
 <script setup>
+import { useCounterStore } from "../stores/example-store";
 import { ref } from "vue";
 import { useRouter } from "vue-router";
 import { useQuasar } from "quasar";
-const darkMode = ref(false);
 const $q = useQuasar();
 const showModal = ref(false);
+const commonStore = useCounterStore();
 const isPwd = ref(true);
 const form = ref({
   email: null,
@@ -174,6 +175,7 @@ const form = ref({
 });
 const userEmail = ref(null);
 const handleLogin = () => {
+  commonStore.UserLogin(form.value);
   router.push({ name: "dashboard-index" });
 };
 const router = useRouter();

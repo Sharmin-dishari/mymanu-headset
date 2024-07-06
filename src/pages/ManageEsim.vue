@@ -28,7 +28,7 @@
           </q-avatar>
           <div class="q-pt-sm text-h6 text-bold text-grey-9">Unlock</div>
           <div class="text-subtitle2">new opportunity</div>
-          <div class="text-center q-py-md q-mx-xl">
+          <div class="flex flex-center q-py-md q-mx-xl">
             <q-btn class="book-btn" no-caps type="submit">
               <div class="row justify-between" style="width: 100%">
                 <div class="q-ma-xs q-mb-lg row">
@@ -66,7 +66,7 @@
             Scan to add <span class="text-bold">Esim </span>
           </div>
           <div class="text-subtitle2">Profile</div>
-          <div class="text-center q-py-md q-mx-xl">
+          <div class="flex flex-center q-py-md q-mx-xl">
             <q-btn class="book-btn" no-caps type="submit">
               <div class="row justify-between" style="width: 100%">
                 <div class="q-ma-xs q-mb-lg row">

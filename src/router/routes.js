@@ -30,7 +30,18 @@ const routes = [
       },
       {
         path: "",
+        name: "sign-index",
         component: () => import("pages/SignIndex.vue"),
+      },
+      {
+        path: "sign-up",
+        name: "sign-up",
+        component: () => import("pages/SignUp.vue"),
+      },
+      {
+        path: "settings-index",
+        name: "settings-index",
+        component: () => import("pages/SettingsIndex.vue"),
       },
     ],
   },

@@ -172,17 +172,18 @@ const isPwd = ref(true);
 const form = ref({
   email: null,
   password: null,
-  application_type: "personal",
-  device_type: "headset",
+  lang: "en",
+  application_type: 2,
+  device_type: 1,
 });
 const isRemember = ref(true);
 const userEmail = ref(null);
 const handleLogin = async () => {
   const res = await commonStore.UserLogin(form.value);
   console.log(res.data.data);
-  if (data.email) {
-    router.push({ name: "dashboard-index" });
-  }
+  router.push({ name: "dashboard-index" });
+  // if (data.email) {
+  // }
 };
 const handleForgotPassword = () => {
   commonStore.ForgotPassword({ email: userEmail.value });

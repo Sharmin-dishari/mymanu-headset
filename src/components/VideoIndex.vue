@@ -3,7 +3,7 @@
     <div class="scroll-wrapper">
       <div class="horizontal-scroll-container" v-if="videoList.length">
         <div v-for="item in videoList" :key="item.id" class="option">
-          <section
+          <q-card
             class="vedio-event bg-grey-2"
             :class="
               $q.dark.isActive ? 'dark-card text-white' : 'bg-white text-black'
@@ -31,7 +31,7 @@
                 />
               </div>
             </div>
-          </section>
+          </q-card>
         </div>
       </div>
     </div>
@@ -78,8 +78,8 @@ const closeModal = () => {
 
 <style>
 .vedio-event {
-  width: 164.09px;
-  height: 189px;
+  max-width: 220px;
+  height: 229px;
   border: 1px solid #ddd;
   padding: 10px;
   position: relative;

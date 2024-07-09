@@ -53,8 +53,8 @@
                   src="/headset.png"
                   style="
                     transform: rotate(180deg);
-                    max-width: 320px;
-                    height: 250px;
+                    max-width: 300px;
+                    height: 150px;
                   "
                 />
                 <q-separator class="q-mx-xl"></q-separator>

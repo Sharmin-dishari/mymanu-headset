@@ -128,6 +128,10 @@ const form = ref({
   name: "",
   password: "",
   confirm_password: "",
+  application_type: "2",
+  device_token:
+    "fBAjEtcfRey9cNHydf1Egi:APA91bG79qVAeS4rkci7RaEj9agT3vonAQbDb_fiRA1U1v1zlGHWIeb8SC16gsCPlJ6yMJGmKrCzMixYAsjrXOFYqc6xAY_SNsSBEtZhSQxuUtr4kJDKt4JRCINPgnpG0XNl-64wp1E8",
+  device_type: "1",
 });
 const router = useRouter();
 const commonStore = useCounterStore();
@@ -138,14 +142,7 @@ const validateEmail = (val) => {
 };
 
 const signUp = () => {
-  const payload = {
-    email: form.value.email,
-    name: form.value.name,
-    password: form.value.password,
-    application_type: "personal",
-    device_type: "headset",
-  };
-  commonStore.UserRegister(payload);
+  commonStore.UserRegister(form.value);
 };
 </script>
 

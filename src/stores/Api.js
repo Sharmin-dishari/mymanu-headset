@@ -1,24 +1,20 @@
 import axios from "axios";
 const API_URL = "https://cehwapi.mymanu.com/api/v1";
 const RESOURCE_NAME = "preference";
+const headers = {
+  Accept: "application/json",
+  "Content-Type": "multipart/form-data",
+  "Access-Control-Allow-Origin": "*",
+  lang: "en",
+};
 export default {
   UserLogin(payload) {
     return axios.post(`${API_URL}/user/login`, payload, {
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "multipart/form-data",
-        "Access-Control-Allow-Origin": "*",
-      },
+      headers: headers,
     });
   },
   UserRegister(payload) {
-    return axios.post(`${API_URL}/user/signup`, payload, {
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "multipart/form-data",
-        "Access-Control-Allow-Origin": "*",
-      },
-    });
+    return axios.post(`${API_URL}/user/signup`, payload, { headers: headers });
   },
   ForgotPassword(payload) {
     return axios.post(`${API_URL}/user/forgot-password`, payload);

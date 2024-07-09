@@ -12,15 +12,15 @@
           />
         </div>
         <div class="text-center text-h6 q-mt-xs">My Device</div>
-        <div>
+        <div></div>
+        <!-- <div>
           <q-btn
             icon="menu"
-            @click="$router.push({ name: 'settings-index' })"
             outline=""
             color="text-grey-6"
             round
           />
-        </div>
+        </div> -->
       </div>
     </q-header>
     <div class="row justify-center" align="center">

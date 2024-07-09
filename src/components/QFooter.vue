@@ -14,7 +14,7 @@
       </div>
       <div class="q-mx-lg">Home</div>
     </q-btn>
-    <q-btn rounded no-caps>
+    <q-btn rounded no-caps @click="$router.push({ name: 'settings-index' })">
       <div class="person-icon row flex-center bg-red">
         <q-avatar class="q-pa-none q-ma-none">
           <q-icon

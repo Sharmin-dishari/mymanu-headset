@@ -1,50 +1,59 @@
 import { defineStore } from "pinia";
 import Api from "./Api";
 import { LocalStorage } from "quasar";
-
-export const useCounterStore = defineStore("counter", {
+export const useCounterStore = defineStore("user-auth", {
   state: () => ({
-    counter: 0,
     userProfile: null,
-    accessToken: null,
+    apiToken: null,
   }),
-  getters: {
-    doubleCount: (state) => state.counter * 2,
-  },
+  getters: {},
 
   actions: {
     UserRegister(payload) {
       Api.UserRegister(payload).then((response) => {});
     },
-    async UserLogin(payload) {
-      const data = await Api.UserLogin(payload);
-      console.log(data, "dd");
-      return data;
+    async userLogin(payload) {
+      const res = await Api.UserLogin(payload);
+      this.userProfile = res.data?.data;
+      this.apiToken = res.data?.data[0]?.login_access_token_translate;
       LocalStorage.set("userInfo", this.userProfile);
     },
-    ForgotPassword(payload) {
-      Api.ForgotPassword(payload).then((response) => {});
+    async ForgotPassword(payload) {
+      return Api.ForgotPassword(payload);
     },
-    UpdatePassword(payload) {
+    async UpdatePassword(payload) {
       const headers = {
-        Authorization: `Bearer ${this.accessToken}`,
+        Authorization: `Bearer ${this.apiToken}`,
         "Content-Type": "application/json",
       };
-      Api.UpdatePassword(payload, headers).then((response) => {});
+      return Api.UpdatePassword(payload, headers);
     },
-    UpdateEmail(payload) {
+    async UpdateEmail(payload) {
       const headers = {
-        Authorization: `Bearer ${this.accessToken}`,
+        Authorization: `Bearer ${this.apiToken}`,
         "Content-Type": "application/json",
       };
-      Api.UpdateEmail(payload, headers).then((response) => {});
+      return Api.UpdateEmail(payload, headers);
     },
-    UpdateName(payload) {
+    async UpdateName(payload) {
       const headers = {
-        Authorization: `Bearer ${this.accessToken}`,
+        Authorization: `Bearer ${this.apiToken}`,
         "Content-Type": "application/json",
       };
-      Api.UpdateName(payload, headers).then((response) => {});
+      return Api.UpdateName(payload, headers);
     },
+    logout() {
+      this.$reset(); // Reset the state of the store
+      LocalStorage.remove("userInfo"); // Remove the persisted user info from LocalStorage
+    },
+  },
+  persist: {
+    enabled: true,
+    strategies: [
+      {
+        key: "mymanu_auth",
+        storage: ["userAuthInfo", "apiToken"],
+      },
+    ],
   },
 });

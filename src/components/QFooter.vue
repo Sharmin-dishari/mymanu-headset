@@ -1,6 +1,6 @@
 <template>
   <div class="foot-btn row flex-center justify-around">
-    <q-btn rounded no-caps @click="$router.push({ name: 'dashboard-index' })">
+    <q-btn rounded no-caps @click="$router.push({ name: 'dashboard' })">
       <div class="person-icon row flex-center bg-red">
         <q-avatar class="q-pa-none q-ma-none">
           <q-icon

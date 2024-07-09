@@ -170,28 +170,34 @@ const showModal = ref(false);
 const commonStore = useCounterStore();
 const isPwd = ref(true);
 const form = ref({
-  email: null,
-  password: null,
-  lang: "en",
-  application_type: 2,
-  device_type: 1,
+  application_type: "2",
+  application_version: "34.1.8",
+  device_token:
+    "fBAjEtcfRey9cNHydf1Egi:APA91bG79qVAeS4rkci7RaEj9agT3vonAQbDb_fiRA1U1v1zlGHWIeb8SC16gsCPlJ6yMJGmKrCzMixYAsjrXOFYqc6xAY_SNsSBEtZhSQxuUtr4kJDKt4JRCINPgnpG0XNl-64wp1E8",
+  device_type: "1",
+  email: "dinesh.singh.kunwar@gmail.com",
+  password: "Hello@123",
 });
+
 const isRemember = ref(true);
 const userEmail = ref(null);
 const handleLogin = async () => {
-  const res = await commonStore.UserLogin(form.value);
-  console.log(res.data.data);
-  router.push({ name: "dashboard-index" });
-  // if (data.email) {
-  // }
+  await commonStore.userLogin(form.value);
+  $q.notify({
+    message: "Login Succesfully",
+    icon: "announcement",
+    color: "green",
+  });
+  if (commonStore.userProfile) {
+    router.push({ name: "dashboard" });
+  }
 };
 const handleForgotPassword = () => {
   commonStore.ForgotPassword({ email: userEmail.value });
   $q.notify({
-    message: "Password reset link has been sent to your email.",
-    color: "green-4",
-    textColor: "white",
-    icon: "cloud_done",
+    message: "OTP for forgot password has been sent to email",
+    color: "green",
+    icon: "announcement",
   });
   showModal.value = false;
 };

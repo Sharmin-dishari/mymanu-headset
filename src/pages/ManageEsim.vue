@@ -12,7 +12,15 @@
           />
         </div>
         <div class="text-center text-h6 q-mt-xs">My Device</div>
-        <div></div>
+        <div>
+          <q-btn
+            icon="logout"
+            outline
+            color="text-grey-6"
+            round
+            @click="handleLogout"
+          />
+        </div>
       </div>
     </q-header>
     <div>
@@ -96,9 +104,16 @@
     </q-footer>
   </q-page>
 </template>
-
 <script setup>
 import QFooter from "../components/QFooter.vue";
+import { useCounterStore } from "../stores/example-store";
+import { useRouter } from "vue-router";
+const router = useRouter();
+const commonStore = useCounterStore();
+const handleLogout = () => {
+  commonStore.logout();
+  router.push({ name: "sign-index" });
+};
 </script>
 
 <style scoped>

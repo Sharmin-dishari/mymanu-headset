@@ -28,7 +28,7 @@
 
       <q-tab-panels v-model="tab" animated class="q-pa-md bg-grey-2">
         <q-tab-panel name="name">
-          <q-form @submit="onSuonSubmitNamebmit">
+          <q-form @submit="onSubmitName">
             <div class="text-h6">Update Name</div>
             <div>
               <q-input
@@ -85,14 +85,14 @@
           <q-form @submit="onSubmitPassword">
             <q-input
               v-model="form.password"
-              class="itc-input required"
+              class="itc-input required q-mt-md"
               stack-label
               outlined
               placeholder="Your password"
               :type="isPwd ? 'password' : 'text'"
               :rules="[
                 (val) => !!val || 'Password is required',
-                (val) => val.length >= 6 || 'Minimum 6 characters required',
+                (val) => val.length >= 8 || 'Minimum 8 characters required',
               ]"
             >
               <template #prepend> <q-icon name="lock" /></template>
@@ -106,14 +106,14 @@
             </q-input>
             <q-input
               v-model="form.confirm_password"
-              class="itc-input required q-mb-lg"
+              class="itc-input required q-my-lg"
               stack-label
               outlined
               placeholder="Confirm password"
               :type="confirm_password ? 'password' : 'text'"
               :rules="[
                 (val) => !!val || 'Password is required',
-                (val) => val.length >= 6 || 'Minimum 6 characters required',
+                (val) => val.length >= 8 || 'Minimum 8 characters required',
               ]"
             >
               <template #prepend> <q-icon name="lock" /></template>
@@ -138,7 +138,8 @@
 </template>
 
 <script setup>
-import { ref } from "vue";
+import { useQuasar } from "quasar";
+import { ref, watchEffect } from "vue";
 import { useCounterStore } from "../stores/example-store";
 const commonStore = useCounterStore();
 const tab = ref("name");
@@ -151,26 +152,60 @@ const form = ref({
   confirm_password: "",
 });
 
+const q = useQuasar();
 const validateEmail = (email) => {
   const res =
     /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
   return res.test(String(email).toLowerCase());
 };
-
-const onSubmitName = () => {
-  commonStore.UpdateName({
+const payload = {
+  application_type: "2",
+  application_version: "34.1.8",
+  device_token:
+    "fBAjEtcfRey9cNHydf1Egi:APA91bG79qVAeS4rkci7RaEj9agT3vonAQbDb_fiRA1U1v1zlGHWIeb8SC16gsCPlJ6yMJGmKrCzMixYAsjrXOFYqc6xAY_SNsSBEtZhSQxuUtr4kJDKt4JRCINPgnpG0XNl-64wp1E8",
+  device_type: "1",
+};
+watchEffect(() => {
+  form.value.name = commonStore.userProfile[0].user_name;
+  form.value.email = commonStore.userProfile[0].user_email;
+});
+const onSubmitName = async () => {
+  const res = await commonStore.UpdateName({
     name: form.value.name,
+    ...payload,
   });
+  q.notify({
+    message: `${res.data.message}`,
+    icon: "announcement",
+    color: "green",
+  });
+  commonStore.userProfile[0].user_name = form.value.name;
 };
-const onSubmitEmail = () => {
-  commonStore.UpdateEmail({
+const onSubmitEmail = async () => {
+  const res = await commonStore.UpdateEmail({
     email: form.value.email,
+    ...payload,
   });
+  q.notify({
+    message: `${res.data.message}`,
+    icon: "announcement",
+    color: "green",
+  });
+  commonStore.userProfile[0].user_email = form.value.email;
 };
-const onSubmitPassword = () => {
-  commonStore.UpdatePassword({
-    password: form.value.password,
+const onSubmitPassword = async () => {
+  const res = await commonStore.UpdatePassword({
+    password: form.value.confirm_password,
+    old_password: form.value.password,
+    ...payload,
   });
+  q.notify({
+    message: `${res.data.message}`,
+    icon: "announcement",
+    color: "green",
+  });
+  form.value.password = null;
+  form.value.confirm_password = null;
 };
 </script>
 

@@ -175,8 +175,8 @@ const form = ref({
   device_token:
     "fBAjEtcfRey9cNHydf1Egi:APA91bG79qVAeS4rkci7RaEj9agT3vonAQbDb_fiRA1U1v1zlGHWIeb8SC16gsCPlJ6yMJGmKrCzMixYAsjrXOFYqc6xAY_SNsSBEtZhSQxuUtr4kJDKt4JRCINPgnpG0XNl-64wp1E8",
   device_type: "1",
-  email: "dinesh.singh.kunwar@gmail.com",
-  password: "Hello@123",
+  email: "",
+  password: "",
 });
 
 const isRemember = ref(true);

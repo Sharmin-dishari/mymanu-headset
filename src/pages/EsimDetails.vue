@@ -92,7 +92,7 @@
             <div class="q-ma-xs q-mb-lg row">
               <div>
                 <q-btn square class="btnBorder" color="red" unelevated outline>
-                  <img src="public/Frame.png" />
+                  <q-icon name="card_membership" />
                 </q-btn>
               </div>
               <div class="q-ml-md">

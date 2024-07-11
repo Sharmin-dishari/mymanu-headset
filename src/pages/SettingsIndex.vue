@@ -33,7 +33,7 @@
             <div>
               <q-input
                 v-model="form.name"
-                class="itc-input required q-mb-sm"
+                class="required q-mb-sm"
                 stack-label
                 outlined
                 placeholder="Enter your name"
@@ -58,7 +58,7 @@
             <div>
               <q-input
                 v-model="form.email"
-                class="itc-input required q-mb-sm"
+                class="required q-mb-sm"
                 stack-label
                 outlined
                 placeholder="Enter your email"
@@ -85,7 +85,7 @@
           <q-form @submit="onSubmitPassword">
             <q-input
               v-model="form.password"
-              class="itc-input required q-mt-md"
+              class="required q-mt-md"
               stack-label
               outlined
               placeholder="Your password"
@@ -106,7 +106,7 @@
             </q-input>
             <q-input
               v-model="form.confirm_password"
-              class="itc-input required q-my-lg"
+              class="required q-my-lg"
               stack-label
               outlined
               placeholder="Confirm password"

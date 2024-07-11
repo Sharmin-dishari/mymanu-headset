@@ -1,10 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+<manifest xmlns:tools="http://schemas.android.com/tools"
+  xmlns:android="http://schemas.android.com/apk/res/android">
   <!-- Permissions -->
   <uses-permission android:name="android.permission.BLUETOOTH" />
   <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
   <uses-permission android:name="android.permission.BLUETOOTH_CONNECT"/>
   <uses-permission android:name="android.permission.BLUETOOTH_SCAN"/>
+  <uses-permission android:name="android.permission.CAMERA"
+    tools:ignore="PermissionImpliesUnsupportedChromeOsHardware" />
   <uses-permission android:name="android.permission.BLUETOOTH_ADVERTISE" />
 
   <!--android6.0以上使用蓝牙需要的权限，否则在Android6.0以上的手机扫描不到蓝牙设备-->

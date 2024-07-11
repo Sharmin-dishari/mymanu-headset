@@ -53,8 +53,8 @@
                   src="/headset.png"
                   style="
                     transform: rotate(180deg);
-                    max-width: 320px;
-                    height: 250px;
+                    max-width: 300px;
+                    height: 150px;
                   "
                 />
                 <q-separator class="q-mx-xl"></q-separator>
@@ -95,6 +95,8 @@ import { ref } from "vue";
 import VideoIndex from "../components/VideoIndex.vue";
 const videoList = ref(["https://www.youtube.com/embed/k3_tw44QsZQ?rel=0"]);
 const addDevice = ref(false);
+import { useRouter } from "vue-router";
+const router = useRouter();
 </script>
 
 <style scoped>

@@ -58,7 +58,7 @@
             <q-toggle
               size="md"
               @update:model-value="darkMode = !darkMode"
-              v-model="darkMode"
+              v-model="isRemember"
               val="dark"
             />
             <div class="q-mt-sm">Remember Me</div>
@@ -161,22 +161,48 @@
 </template>
 
 <script setup>
+import { useCounterStore } from "../stores/example-store";
 import { ref } from "vue";
 import { useRouter } from "vue-router";
 import { useQuasar } from "quasar";
-const darkMode = ref(false);
 const $q = useQuasar();
+
+const isRemember = ref(true);
+const userEmail = ref(null);
+const router = useRouter();
+
 const showModal = ref(false);
+const commonStore = useCounterStore();
 const isPwd = ref(true);
 const form = ref({
-  email: null,
-  password: null,
+  application_type: "2",
+  application_version: "34.1.8",
+  device_token:
+    "fBAjEtcfRey9cNHydf1Egi:APA91bG79qVAeS4rkci7RaEj9agT3vonAQbDb_fiRA1U1v1zlGHWIeb8SC16gsCPlJ6yMJGmKrCzMixYAsjrXOFYqc6xAY_SNsSBEtZhSQxuUtr4kJDKt4JRCINPgnpG0XNl-64wp1E8",
+  device_type: "1",
+  email: "",
+  password: "",
 });
-const userEmail = ref(null);
-const handleLogin = () => {
-  router.push({ name: "dashboard-index" });
+const handleLogin = async () => {
+  await commonStore.userLogin(form.value);
+  $q.notify({
+    message: "Login Succesfully",
+    icon: "announcement",
+    color: "green",
+  });
+  if (commonStore.userProfile) {
+    router.push({ name: "dashboard" });
+  }
 };
-const router = useRouter();
+const handleForgotPassword = () => {
+  commonStore.ForgotPassword({ email: userEmail.value });
+  $q.notify({
+    message: "OTP for forgot password has been sent to email",
+    color: "green",
+    icon: "announcement",
+  });
+  showModal.value = false;
+};
 
 const emailValidationRegex =
   /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;

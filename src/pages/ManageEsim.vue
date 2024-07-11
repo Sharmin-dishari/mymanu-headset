@@ -12,7 +12,15 @@
           />
         </div>
         <div class="text-center text-h6 q-mt-xs">My Device</div>
-        <div></div>
+        <div>
+          <q-btn
+            icon="logout"
+            outline
+            color="text-grey-6"
+            round
+            @click="handleLogout"
+          />
+        </div>
       </div>
     </q-header>
     <div>
@@ -28,7 +36,7 @@
           </q-avatar>
           <div class="q-pt-sm text-h6 text-bold text-grey-9">Unlock</div>
           <div class="text-subtitle2">new opportunity</div>
-          <div class="text-center q-py-md q-mx-xl">
+          <div class="flex flex-center q-py-md q-mx-xl">
             <q-btn class="book-btn" no-caps type="submit">
               <div class="row justify-between" style="width: 100%">
                 <div class="q-ma-xs q-mb-lg row">
@@ -66,7 +74,7 @@
             Scan to add <span class="text-bold">Esim </span>
           </div>
           <div class="text-subtitle2">Profile</div>
-          <div class="text-center q-py-md q-mx-xl">
+          <div class="flex flex-center q-py-md q-mx-xl">
             <q-btn class="book-btn" no-caps type="submit">
               <div
                 class="row justify-between"
@@ -100,17 +108,25 @@
     </q-footer>
   </q-page>
 </template>
-
 <script setup>
 import QFooter from "../components/QFooter.vue";
 import Esim from "boot/EchoPlugin";
+import { useCounterStore } from "../stores/example-store";
+import { useRouter } from "vue-router";
 
 const handleNativeAndroidCode = async () => {
   console.log("Alamin Debugging: handleNativeAndroidCode called");
   const { value } = await Esim.openEsimActivity({
     value: "Hello Debasish Roy....!\nWelcome to new esim configuration...",
   });
+
   console.log("Response from native:", value);
+};
+const router = useRouter();
+const commonStore = useCounterStore();
+const handleLogout = () => {
+  commonStore.logout();
+  router.push({ name: "sign-index" });
 };
 </script>
 

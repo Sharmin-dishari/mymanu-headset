@@ -16,7 +16,7 @@ public class EsimPlugin extends Plugin {
     String value = call.getString("value");
 
     // Create an intent to start the new activity
-    Intent intent = new Intent(getActivity(), EsimActivity.class);
+    Intent intent = new Intent(getActivity(), EsimManagerActivity.class);
     intent.putExtra("value", value); // Pass any data you need to the new activity
 
     // Start the new activity

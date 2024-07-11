@@ -13,8 +13,22 @@
         </div>
         <div class="text-center text-h6 q-mt-xs">My Device</div>
         <div>
-          <q-btn icon="menu" outline="" color="text-grey-6" round />
+          <q-btn
+            icon="logout"
+            outline
+            color="text-grey-6"
+            round
+            @click="handleLogout"
+          />
         </div>
+        <!-- <div>
+          <q-btn
+            icon="menu"
+            outline=""
+            color="text-grey-6"
+            round
+          />
+        </div> -->
       </div>
     </q-header>
     <div class="row justify-center" align="center">
@@ -100,7 +114,10 @@
           </div>
           <div>Update Wallpaper</div>
         </q-card>
-        <q-card class="mycard q-pa-sm">
+        <q-card
+          class="mycard q-pa-sm"
+          @click="$router.push({ name: 'settings-index' })"
+        >
           <div class="row justify-between">
             <div class="q-ma-xs q-mb-lg">
               <q-btn square class="btnBorder" color="grey-2" unelevated>
@@ -123,7 +140,16 @@
   </q-page>
 </template>
 
-<script setup></script>
+<script setup>
+import { useCounterStore } from "../stores/example-store";
+const commonStore = useCounterStore();
+import { useRouter } from "vue-router";
+const router = useRouter();
+const handleLogout = () => {
+  commonStore.logout();
+  router.push({ name: "sign-index" });
+};
+</script>
 
 <style>
 .btnBorder {

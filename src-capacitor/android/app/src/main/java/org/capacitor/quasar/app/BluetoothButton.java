@@ -131,10 +131,10 @@ public class BluetoothButton extends AppCompatActivity implements View.OnClickLi
                 if (Applicat.gDevBle!=null){
                     connected = Applicat.gDevBle.isConnected();
                     if (connected) {
-                        mtv_bbtShow.setText("连接成功："+Applicat.gDevBle.getName());
+                        mtv_bbtShow.setText("Connection successful："+Applicat.gDevBle.getName());
                         setOnRecCmdCallback();
                     }else {
-                        mtv_bbtShow.setText("连接未成功："+Applicat.gDevBle.getName());
+                        mtv_bbtShow.setText("Connection unsuccessful："+Applicat.gDevBle.getName());
                     }
                     showInfoLog(false,"Device:" + Applicat.gDevBle.getAddr() + " connect:" + connected);
                 }else {

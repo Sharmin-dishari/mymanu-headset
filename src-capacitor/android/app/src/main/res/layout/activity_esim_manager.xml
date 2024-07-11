@@ -29,7 +29,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:fontFamily="@font/spartan_semi_bold"
-                android:textColor="@color/black_color"
+                android:textColor="@color/colorAccent"
                 android:textSize="20dp"
                 android:text="@string/lbl_sim_manager"
                 android:textStyle="bold" />
@@ -88,6 +88,8 @@
         android:layout_height="wrap_content"
         android:onClick="onClick"
         android:text="Connect"
+        android:background="@color/colorAccent"
+        android:textColor="@color/white"
         />
     </LinearLayout>
 

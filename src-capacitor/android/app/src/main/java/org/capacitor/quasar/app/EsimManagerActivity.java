@@ -2,6 +2,7 @@ package org.capacitor.quasar.app;
 
 import static com.kfree.btspp.BtSppBase.BT_SPP_STATE.STATE_CONNECTED;
 
+import android.Manifest;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
@@ -10,9 +11,11 @@ import android.bluetooth.BluetoothSocket;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.hardware.Camera;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -28,8 +31,11 @@ import android.widget.RelativeLayout;
 import android.widget.Switch;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatTextView;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.core.graphics.drawable.DrawableCompat;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -79,6 +85,7 @@ import javax.net.ssl.TrustManagerFactory;
 
 public class EsimManagerActivity extends AppCompatActivity implements View.OnClickListener {
     private static final String TAG = "EsimManagerActivity";
+    private static final int REQUEST_BLUETOOTH_PERMISSIONS = 1;
 
     private LinearLayout mlinear_show,mlinear_btn;
     private FloatingActionButton addCard;
@@ -94,6 +101,10 @@ public class EsimManagerActivity extends AppCompatActivity implements View.OnCli
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_esim_manager);
         EsimUtils.copyFilesFromAssets(this);
+
+      if (!checkBluetoothPermissions()) {
+        requestBluetoothPermissions();
+      }
 
         mlinear_show = findViewById(R.id.linear_show);
         mlinear_btn = findViewById(R.id.linear_btn);
@@ -120,7 +131,56 @@ public class EsimManagerActivity extends AppCompatActivity implements View.OnCli
         initOkhttp();
     }
 
-    private void initConnect(){
+  public boolean checkBluetoothPermissions() {
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+      // Android 13 and above
+      return ContextCompat.checkSelfPermission(this, android.Manifest.permission.BLUETOOTH_SCAN) == PackageManager.PERMISSION_GRANTED &&
+        ContextCompat.checkSelfPermission(this, android.Manifest.permission.BLUETOOTH_CONNECT) == PackageManager.PERMISSION_GRANTED &&
+        ContextCompat.checkSelfPermission(this, android.Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED &&
+        ContextCompat.checkSelfPermission(this, android.Manifest.permission.BLUETOOTH_ADVERTISE) == PackageManager.PERMISSION_GRANTED;
+    } else {
+      // Android 12 and below
+      return ContextCompat.checkSelfPermission(this, android.Manifest.permission.BLUETOOTH) == PackageManager.PERMISSION_GRANTED &&
+        ContextCompat.checkSelfPermission(this, android.Manifest.permission.BLUETOOTH_ADMIN) == PackageManager.PERMISSION_GRANTED &&
+        ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED &&
+        ContextCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED;
+    }
+  }
+
+  public void requestBluetoothPermissions() {
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+      // Android 13 and above
+      ActivityCompat.requestPermissions(this,
+        new String[]{android.Manifest.permission.BLUETOOTH_SCAN, android.Manifest.permission.BLUETOOTH_CONNECT, android.Manifest.permission.BLUETOOTH_ADVERTISE, android.Manifest.permission.ACCESS_FINE_LOCATION, android.Manifest.permission.CAMERA},
+        REQUEST_BLUETOOTH_PERMISSIONS);
+    } else {
+      // Android 12 and below
+      ActivityCompat.requestPermissions(this,
+        new String[]{android.Manifest.permission.BLUETOOTH, android.Manifest.permission.BLUETOOTH_ADMIN, android.Manifest.permission.ACCESS_FINE_LOCATION, android.Manifest.permission.CAMERA},
+        REQUEST_BLUETOOTH_PERMISSIONS);
+    }
+  }
+
+  @Override
+  public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+    super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+    if (requestCode == REQUEST_BLUETOOTH_PERMISSIONS) {
+      boolean allGranted = true;
+      for (int result : grantResults) {
+        if (result != PackageManager.PERMISSION_GRANTED) {
+          allGranted = false;
+          break;
+        }
+      }
+      if (allGranted) {
+        // Permissions granted, proceed with Bluetooth operation
+      } else {
+        // Permissions denied, show a message to the user
+      }
+    }
+  }
+
+  private void initConnect(){
         initProgressDialog();
         showProgressDialog("Connecting...");
         mhandler.sendEmptyMessageDelayed(0,5000);

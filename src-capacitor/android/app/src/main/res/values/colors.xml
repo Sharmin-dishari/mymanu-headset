@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="purple_200">#FFBB86FC</color>
+    <color name="purple_500">#FF6200EE</color>
+    <color name="purple_700">#FF3700B3</color>
+    <color name="teal_200">#FF03DAC5</color>
+    <color name="teal_700">#FF018786</color>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+
+    <color name="colorPrimary">#008577</color>
+    <color name="colorPrimaryDark">#00574B</color>
+    <color name="colorAccent">#ED0F37</color>
+
+    <color name="editTextHeader">#383838</color>
+    <color name="editTextContent">#757575</color>
+    <color name="separator">#D9D9D9</color>
+    <color name="divider">#EEEEEE</color>
+
+    <color name="window_color_dark">@android:color/black</color>
+
+    <color name="twenty_percent_black_overlay">#34000000</color>
+    <color name="app_shortcut_default_foreground">#607d8b</color>
+    <color name="app_shortcut_default_background">#f5f5f5</color>
+    <color name="md_indigo_A400">#3D5AFE</color>
+    <color name="dark_color">#202124</color>
+    <color name="black_color">#202124</color>
+
+    <color name="darkColorPrimary">#202124</color>
+    <color name="darkColorSurface">#202124</color>
+
+    <color name="blackColorSurface">#000000</color>
+
+    <color name="transparent">#00000000</color>
+    <color name="semi_transparent">#20000000</color>
+    <!-- card colors -->
+    <color name="card_background">#ffffff</color>
+    <color name="card_shadow_1">#d4d4d4</color>
+    <color name="card_shadow_2">#dddddd</color>
+
+    <color name="progress_gray">#FFD8D8D8</color>
+    <color name="default_blue_light">#ff33b5e5</color>
+
+    <!-- bottom sheets colors -->
+    <color name="actions_divider_color">#cccccc</color>
+    <color name="action_item_icon">#757575</color>
+    <color name="action_item_text">#080808</color>
+    <color name="action_item_overlay">#30000000</color>
+    <color name="bottom_sheet_dim_color">#000000</color>
+    <color name="bottom_sheet_background_color">#ffffff</color>
+    <color name="toolbar_bg">#F6F6F6</color>
+</resources>

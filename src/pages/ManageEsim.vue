@@ -68,7 +68,11 @@
           <div class="text-subtitle2">Profile</div>
           <div class="text-center q-py-md q-mx-xl">
             <q-btn class="book-btn" no-caps type="submit">
-              <div class="row justify-between" style="width: 100%">
+              <div
+                class="row justify-between"
+                style="width: 100%"
+                @click="handleNativeAndroidCode"
+              >
                 <div class="q-ma-xs q-mb-lg row">
                   <q-btn square class="btnBorder" color="grey-2" unelevated>
                     <q-icon name="add" color="red" size="15px" />
@@ -99,6 +103,15 @@
 
 <script setup>
 import QFooter from "../components/QFooter.vue";
+import Esim from "boot/EchoPlugin";
+
+const handleNativeAndroidCode = async () => {
+  console.log("Alamin Debugging: handleNativeAndroidCode called");
+  const { value } = await Esim.openEsimActivity({
+    value: "Hello Debasish Roy....!\nWelcome to new esim configuration...",
+  });
+  console.log("Response from native:", value);
+};
 </script>
 
 <style scoped>

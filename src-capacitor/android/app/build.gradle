@@ -32,6 +32,7 @@ repositories {
 
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
+    implementation fileTree(dir: 'libs', include: ['*.aar'])
     implementation "androidx.appcompat:appcompat:$androidxAppCompatVersion"
     implementation "androidx.coordinatorlayout:coordinatorlayout:$androidxCoordinatorLayoutVersion"
     implementation "androidx.core:core-splashscreen:$coreSplashScreenVersion"
@@ -40,6 +41,14 @@ dependencies {
     androidTestImplementation "androidx.test.ext:junit:$androidxJunitVersion"
     androidTestImplementation "androidx.test.espresso:espresso-core:$androidxEspressoCoreVersion"
     implementation project(':capacitor-cordova-android-plugins')
+
+  implementation 'com.squareup.okhttp:okhttp:2.7.2'
+  implementation 'com.google.android.material:material:1.12.0'
+  implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
+//  testImplementation 'junit:junit:4.+'
+//  androidTestImplementation 'androidx.test.ext:junit:1.1.1'
+//  androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+  implementation files('libDeviceControl-debug.aar')
 }
 
 apply from: 'capacitor.build.gradle'

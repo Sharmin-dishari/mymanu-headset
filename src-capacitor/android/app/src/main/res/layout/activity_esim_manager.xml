@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:background="@color/toolbar_bg"
+    tools:context=".EsimManagerActivity">
+
+    <LinearLayout
+        android:id="@+id/linear_show"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone"
+        >
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/tbToolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="@color/toolbar_bg"
+            app:layout_constraintTop_toTopOf="parent">
+            <include layout="@layout/toolbar_back" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tvHeader"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:fontFamily="@font/spartan_semi_bold"
+                android:textColor="@color/black_color"
+                android:textSize="20dp"
+                android:text="@string/lbl_sim_manager"
+                android:textStyle="bold" />
+
+        </androidx.appcompat.widget.Toolbar>
+
+        <View
+            android:layout_width="wrap_content"
+            android:layout_height="1dp"
+            android:layout_marginTop="10dp"
+            android:visibility="gone"
+            android:background="@android:color/black"/>
+
+
+        <ListView
+            android:id="@+id/list_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:divider="@null"
+            android:layout_weight="1"
+            />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="20dp"
+            android:gravity="end">
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/addCard"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:elevation="0dp"
+                app:elevation="0dp"
+                app:fabSize="normal"
+                android:scaleType="fitCenter"
+                android:src="@android:drawable/ic_input_add"
+                android:tint="@android:color/white" />
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linear_btn"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        >
+
+    <Button
+        android:id="@+id/btn_connect"
+        android:layout_width="160dp"
+        android:layout_height="wrap_content"
+        android:onClick="onClick"
+        android:text="Connect"
+        />
+    </LinearLayout>
+
+</LinearLayout>

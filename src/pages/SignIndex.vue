@@ -15,7 +15,7 @@
         <div>
           <q-input
             v-model="form.email"
-            class="itc-input required q-mb-sm"
+            class="required q-mb-sm"
             stack-label
             outlined
             placeholder="Enter your email"
@@ -31,14 +31,16 @@
           </q-input>
           <q-input
             v-model="form.password"
-            class="itc-input required"
+            class="required q-mb-lg"
             stack-label
             outlined
             placeholder="Enter your password"
             :type="isPwd ? 'password' : 'text'"
             :rules="[
-              (val) => !!val || 'Password is required',
-              (val) => val.length >= 6 || 'Minimum 6 characters required',
+              (val) => !!val,
+              (val) =>
+                val.length >= 8 ||
+                'Password must contain at least one lowercase letter, one uppercase letter, one digit, and one special character.',
             ]"
           >
             <template #prepend> <q-icon name="lock" /></template>
@@ -117,7 +119,7 @@
             <div>
               <q-input
                 v-model="userEmail"
-                class="itc-input required q-mb-sm"
+                class="required q-mb-sm"
                 stack-label
                 outlined
                 placeholder="Enter your email"
@@ -184,14 +186,20 @@ const form = ref({
   password: "",
 });
 const handleLogin = async () => {
-  await commonStore.userLogin(form.value);
-  $q.notify({
-    message: "Login Succesfully",
-    icon: "announcement",
-    color: "green",
-  });
-  if (commonStore.userProfile) {
+  const res = await commonStore.userLogin(form.value);
+  if (commonStore.userProfile?.length) {
+    $q.notify({
+      message: "Login Succesfully",
+      icon: "announcement",
+      color: "green",
+    });
     router.push({ name: "dashboard" });
+  } else {
+    $q.notify({
+      message: res.data.message,
+      icon: "announcement",
+      color: "red-7",
+    });
   }
 };
 const handleForgotPassword = () => {

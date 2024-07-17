@@ -1,5 +1,5 @@
 <template>
-  <q-page class="bg-grey-2">
+  <q-page class="bg-grey-2" style="padding-bottom: 80px">
     <q-header class="bg-white text-black q-pa-md">
       <div class="row justify-between">
         <div>
@@ -32,7 +32,7 @@
             style="border-radius: 50%"
             text-color="white"
           >
-            <div class="q-pa-sm"><img src="public/cart.png" /></div>
+            <div class="q-pa-sm"><img src="cart.png" /></div>
           </q-avatar>
           <div class="q-pt-sm text-h6 text-bold text-grey-9">Unlock</div>
           <div class="text-subtitle2">new opportunity</div>
@@ -68,7 +68,7 @@
             style="border-radius: 50%"
             text-color="white"
           >
-            <div class="q-pa-sm"><img src="public/qr-scan.png" /></div>
+            <div class="q-pa-sm"><img src="qr-scan.png" /></div>
           </q-avatar>
           <div class="q-pt-sm text-h6 text-bold text-grey-9">
             Scan to add <span class="text-bold">Esim </span>

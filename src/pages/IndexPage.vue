@@ -11,7 +11,7 @@
     <EventCard />
     <div class="q-px-md text-black text-h6">Recommended Tutorial</div>
     <div class="q-pa-md"><VideoIndex :video-list="videoList" /></div>
-    <q-page-sticky position="bottom" :offset="[18, 10]">
+    <q-page-sticky position="bottom" :offset="[18, 4]">
       <q-card-actions class="q-pt-none" align="center">
         <div class="text-center q-py-md">
           <q-btn class="book-btn q-mt-lg" no-caps @click="addDevice = true">

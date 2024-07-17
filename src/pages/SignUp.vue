@@ -15,7 +15,7 @@
         <div>
           <q-input
             v-model="form.name"
-            class="itc-input required"
+            class="required"
             stack-label
             outlined
             placeholder="Enter your name"
@@ -28,7 +28,7 @@
           </q-input>
           <q-input
             v-model="form.email"
-            class="itc-input required"
+            class="required q-my-md"
             stack-label
             outlined
             placeholder="Enter your email"
@@ -44,14 +44,16 @@
           </q-input>
           <q-input
             v-model="form.password"
-            class="itc-input required"
+            class="required q-my-md q-mt-mg"
             stack-label
             outlined
             placeholder="Your password"
             :type="isPwd ? 'password' : 'text'"
             :rules="[
-              (val) => !!val || 'Password is required',
-              (val) => val.length >= 8 || 'Minimum 8 characters required',
+              (val) => !!val,
+              (val) =>
+                val.length >= 8 ||
+                'Password must contain at least one lowercase letter, one uppercase letter, one digit, and one special character.',
             ]"
           >
             <template #prepend> <q-icon name="lock" /></template>
@@ -65,14 +67,16 @@
           </q-input>
           <q-input
             v-model="form.confirm_password"
-            class="itc-input required"
+            class="required"
             stack-label
             outlined
             placeholder="Confirm password"
             :type="confirm_password ? 'password' : 'text'"
             :rules="[
-              (val) => !!val || 'Password is required',
-              (val) => val.length >= 8 || 'Minimum 8 characters required',
+              (val) => !!val,
+              (val) =>
+                val.length >= 8 ||
+                'Password must contain at least one lowercase letter, one uppercase letter, one digit, and one special character.',
             ]"
           >
             <template #prepend> <q-icon name="lock" /></template>
@@ -120,6 +124,7 @@
 <script setup>
 import { useCounterStore } from "../stores/example-store";
 import { ref } from "vue";
+import { useQuasar } from "quasar";
 import { useRouter } from "vue-router";
 const confirm_password = ref(true);
 const isPwd = ref(true);
@@ -133,6 +138,7 @@ const form = ref({
     "fBAjEtcfRey9cNHydf1Egi:APA91bG79qVAeS4rkci7RaEj9agT3vonAQbDb_fiRA1U1v1zlGHWIeb8SC16gsCPlJ6yMJGmKrCzMixYAsjrXOFYqc6xAY_SNsSBEtZhSQxuUtr4kJDKt4JRCINPgnpG0XNl-64wp1E8",
   device_type: "1",
 });
+const $q = useQuasar();
 const router = useRouter();
 const commonStore = useCounterStore();
 const emailValidationRegex =
@@ -141,8 +147,19 @@ const validateEmail = (val) => {
   return emailValidationRegex.test(val);
 };
 
-const signUp = () => {
-  commonStore.UserRegister(form.value);
+const signUp = async () => {
+  const res = await commonStore.UserRegister(form.value);
+  $q.notify({
+    message: res.data.message,
+    icon: "announcement",
+    color: "green",
+  });
+  form.value = {
+    email: "",
+    name: "",
+    password: "",
+    confirm_password: "",
+  };
 };
 </script>
 

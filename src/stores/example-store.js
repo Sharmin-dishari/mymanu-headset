@@ -22,6 +22,9 @@ export const useCounterStore = defineStore("user-auth", {
     async ForgotPassword(payload) {
       return Api.ForgotPassword(payload);
     },
+    async ResetPassword(payload) {
+      return Api.ResetPassword(payload);
+    },
     async UpdatePassword(payload) {
       const headers = {
         Authorization: `Bearer ${this.apiToken}`,

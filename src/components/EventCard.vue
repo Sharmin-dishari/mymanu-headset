@@ -17,22 +17,4 @@
 
 <script setup></script>
 
-<style scoped>
-.my-card {
-  width: 100%;
-  max-width: 220px;
-  border-radius: 20px;
-}
-
-.horizontal-scroll-container {
-  overflow-x: auto;
-  position: relative;
-  white-space: nowrap;
-}
-.scroll-wrapper {
-  overflow: hidden; /* Hide the scrollbar */
-}
-.option {
-  display: inline-block;
-}
-</style>
+<style scoped></style>

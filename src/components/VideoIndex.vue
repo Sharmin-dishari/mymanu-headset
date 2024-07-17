@@ -1,7 +1,10 @@
 <template>
   <div>
     <div class="scroll-wrapper">
-      <div class="horizontal-scroll-container" v-if="videoList.length">
+      <div
+        class="horizontal-scroll-container q-gutter-x-md"
+        v-if="videoList.length"
+      >
         <div v-for="item in videoList" :key="item.id" class="option">
           <q-card
             class="vedio-event bg-grey-2"
@@ -78,11 +81,22 @@ const closeModal = () => {
 
 <style>
 .vedio-event {
-  max-width: 220px;
+  width: 220px;
   height: 229px;
   border: 1px solid #ddd;
   padding: 10px;
   position: relative;
   border-radius: 25px;
+}
+.horizontal-scroll-container {
+  overflow-x: auto;
+  position: relative;
+  white-space: nowrap;
+}
+.scroll-wrapper {
+  overflow: hidden; /* Hide the scrollbar */
+}
+.option {
+  display: inline-block;
 }
 </style>

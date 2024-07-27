@@ -147,7 +147,9 @@ const signUp = async () => {
     password: "",
     confirm_password: "",
   };
-  router.push({ name: "sign-index" });
+  if (res.data.status === true) {
+    router.push({ name: "sign-index" });
+  }
 };
 </script>
 

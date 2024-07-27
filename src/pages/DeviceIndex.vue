@@ -40,7 +40,6 @@
         outline=""
         no-caps
         icon-right="bluetooth"
-        @click="$router.go(-1)"
       />
     </div>
     <div class="flex flex-center q-mt-md">

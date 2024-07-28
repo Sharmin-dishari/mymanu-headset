@@ -10,7 +10,6 @@
     <div class="q-px-md">Sign in with your email or user name</div>
     <div class="q-px-md q-pb-md">Don't remember your username or password</div>
     <q-form @submit="handleLogin" style="max-width: 450px; margin: 0 auto">
-      <div class="q-pa-md text-red-6">Click Here</div>
       <q-card-section class="q-py-none">
         <div>
           <q-input
@@ -54,21 +53,18 @@
           </q-input>
         </div>
       </q-card-section>
-      <q-card-section class="q-py-none">
-        <div class="row justify-between">
-          <div class="row">
-            <q-toggle
-              size="md"
-              @update:model-value="darkMode = !darkMode"
-              v-model="isRemember"
-              val="dark"
-            />
-            <div class="q-mt-sm">Remember Me</div>
-          </div>
-          <div class="q-mt-sm cursor-pointer" @click="showModal = true">
-            Forgot Password
-          </div>
-        </div>
+      <q-card-section class="q-pt-none q-my-none" align="right">
+        Forgot password?
+        <q-btn
+          flat
+          dense
+          no-caps
+          size=".9rem"
+          class="q-py-none"
+          color="primary"
+          label="Reset password"
+          @click="showModal = true"
+        />
       </q-card-section>
       <q-card-actions class="q-pt-none" align="center">
         <div class="text-center q-py-md">
@@ -109,7 +105,7 @@
     <div class="text-center">
       <div class="text-red">Terms of use | Privacy Policy</div>
     </div>
-    <q-dialog v-model="showModal" persistent>
+    <q-dialog v-model="showModal">
       <q-card>
         <q-form
           @submit="handleForgotPassword"
@@ -202,14 +198,19 @@ const handleLogin = async () => {
     });
   }
 };
-const handleForgotPassword = () => {
-  commonStore.ForgotPassword({ email: userEmail.value });
+const handleForgotPassword = async () => {
+  const res = await commonStore.ForgotPassword({ email: userEmail.value });
+  console.log(res);
   $q.notify({
-    message: "OTP for forgot password has been sent to email",
+    message: res.data.message,
     color: "green",
     icon: "announcement",
   });
+  if (res.data.message === "OTP for forgot password has been sent to email") {
+    router.push({ name: "reset-password", query: { email: userEmail.value } });
+  }
   showModal.value = false;
+  userEmail.value = null;
 };
 
 const emailValidationRegex =
@@ -224,5 +225,12 @@ const validateEmail = (val) => {
   width: 295px;
   height: 50.14px;
   background: #fc002b;
+}
+.footer {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  z-index: 1;
 }
 </style>

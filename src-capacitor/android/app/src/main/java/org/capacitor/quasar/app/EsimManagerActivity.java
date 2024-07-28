@@ -102,16 +102,17 @@ public class EsimManagerActivity extends AppCompatActivity implements View.OnCli
         setContentView(R.layout.activity_esim_manager);
         EsimUtils.copyFilesFromAssets(this);
 
-      if (!checkBluetoothPermissions()) {
-        requestBluetoothPermissions();
-      }
+        if (!checkBluetoothPermissions()) {
+          requestBluetoothPermissions();
+        }
 
         mlinear_show = findViewById(R.id.linear_show);
         mlinear_btn = findViewById(R.id.linear_btn);
         mListView = findViewById(R.id.list_name);
         View tbToolbar = findViewById(R.id.tbToolbar);
-        RelativeLayout rlBack = (RelativeLayout) tbToolbar.findViewById(R.id.rlBack);
+        RelativeLayout rlBack = tbToolbar.findViewById(R.id.rlBack);
         rlBack.setOnClickListener(this);
+        rlBack.setVisibility(View.VISIBLE);
         addCard = findViewById(R.id.addCard);
         addCard.setOnClickListener(this);
 
@@ -129,6 +130,24 @@ public class EsimManagerActivity extends AppCompatActivity implements View.OnCli
         };
 
         initOkhttp();
+    }
+
+    @Override
+    public void onNewIntent(Intent intent) {
+      super.onNewIntent(intent);
+      // Custom intent handling logic
+    }
+
+    @Override
+    protected void onResume() {
+      super.onResume();
+      // Restore the custom plugin activity state
+    }
+
+    @Override
+    protected void onPause() {
+      super.onPause();
+      // Save the custom plugin activity state
     }
 
   public boolean checkBluetoothPermissions() {

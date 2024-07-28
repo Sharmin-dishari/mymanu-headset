@@ -8,9 +8,9 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
 
-    <color name="colorPrimary">#008577</color>
-    <color name="colorPrimaryDark">#00574B</color>
-    <color name="colorAccent">#ED0F37</color>
+    <color name="colorPrimary">#ED0F37</color>
+    <color name="colorPrimaryDark">#C10015</color>
+    <color name="colorAccent">#C10015</color>
 
     <color name="editTextHeader">#383838</color>
     <color name="editTextContent">#757575</color>

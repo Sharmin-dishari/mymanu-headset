@@ -21,6 +21,9 @@ export default {
   ForgotPassword(payload) {
     return axios.post(`${API_URL}/user/forgot-password`, payload);
   },
+  ResetPassword(payload) {
+    return axios.post(`${API_URL}/user/reset-password`, payload);
+  },
   UpdatePassword(payload, headers) {
     return axios.post(`${API_URL}/${RESOURCE_NAME}/update-password`, payload, {
       headers: headers,

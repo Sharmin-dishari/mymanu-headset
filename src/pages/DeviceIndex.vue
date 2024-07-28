@@ -95,7 +95,7 @@
           <div>Add esim</div>
         </q-card>
       </div>
-      <div class="row q-px-md q-gutter-md justify-between q-pb-lg">
+      <!-- <div class="row q-px-md q-gutter-md justify-between q-pb-lg">
         <q-card class="mycard q-pa-sm">
           <div class="row justify-between">
             <div class="q-ma-xs q-mb-lg">
@@ -135,12 +135,16 @@
           </div>
           <div>More Option</div>
         </q-card>
-      </div>
+      </div> -->
     </div>
+    <q-footer class="footer">
+      <QFooter />
+    </q-footer>
   </q-page>
 </template>
 
 <script setup>
+import QFooter from "../components/QFooter.vue";
 import { useCounterStore } from "../stores/example-store";
 const commonStore = useCounterStore();
 import { useRouter } from "vue-router";
@@ -163,5 +167,12 @@ const handleLogout = () => {
   border-radius: 10px;
   height: 100px;
   width: 45%;
+}
+.footer {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  z-index: 1;
 }
 </style>

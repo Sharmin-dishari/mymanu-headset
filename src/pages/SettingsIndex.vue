@@ -134,10 +134,14 @@
         </q-tab-panel>
       </q-tab-panels>
     </q-card>
+    <q-footer class="footer">
+      <QFooter />
+    </q-footer>
   </q-page>
 </template>
 
 <script setup>
+import QFooter from "../components/QFooter.vue";
 import { useQuasar } from "quasar";
 import { ref, watchEffect } from "vue";
 import { useCounterStore } from "../stores/example-store";

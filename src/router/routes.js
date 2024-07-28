@@ -46,6 +46,12 @@ const routes = [
         component: () => import("pages/SignUp.vue"),
       },
       {
+        path: "reset-password",
+        name: "reset-password",
+        meta: { requiresAuth: false },
+        component: () => import("pages/ResetPassword.vue"),
+      },
+      {
         path: "settings-index",
         name: "settings-index",
         meta: { requiresAuth: true },

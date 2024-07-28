@@ -61,7 +61,7 @@ public class BluetoothButton extends AppCompatActivity implements View.OnClickLi
     }
 
     private void setOnRecCmdCallback(){
-        Applicat.gDevBle.setOnRecCmdCallback(mCmdCb);
+        Applicat.gDevBle.setOnRecCmdCallback(mCmdCb1);
     }
 
     @Override
@@ -71,34 +71,39 @@ public class BluetoothButton extends AppCompatActivity implements View.OnClickLi
       }
     }
 
-    private DeviceBle.onCmdReceived mCmdCb = new DeviceBle.onCmdReceived() {
+    private DeviceBle.onCmdReceived mCmdCb1 = new DeviceBle.onCmdReceived(){
 
-        @Override
-        public void onCmdReceived(CmdEnums.CMD_ID cmd) {
-            Log.d(TAG,"onCmdReceived---CMD_ID:"+cmd);
-            switch (cmd){
-                case BT_ON_KEY_HEADSET_P:
-                    Log.d(TAG,"--- BT_ON_KEY_HEADSET_P ---");
-                    updateKeyButtonStatus("BT_ON_KEY_HEADSET_P");
-                    break;
-                case BT_ON_KEY_HEADSET_2P:
-                    Log.d(TAG,"--- BT_ON_KEY_HEADSET_2P ---");
-                    updateKeyButtonStatus("BT_ON_KEY_HEADSET_2P");
-                    break;
-                case BT_ON_KEY_HEADSET_3P:
-                    Log.d(TAG,"--- BT_ON_KEY_HEADSET_3P ---");
-                    updateKeyButtonStatus("BT_ON_KEY_HEADSET_3P");
-                    break;
-                case BT_ON_KEY_HEADSET_HOLD:
-                    Log.d(TAG,"--- BT_ON_KEY_HEADSET_HOLD ---");
-                    updateKeyButtonStatus("BT_ON_KEY_HEADSET_HOLD");
-                    break;
-                case BT_ON_KEY_HEADSET_UP:
-                    Log.d(TAG,"--- BT_ON_KEY_HEADSET_UP ---");
-                    updateKeyButtonStatus("BT_ON_KEY_HEADSET_UP");
-                    break;
-            }
+      @Override
+      public void onCmdReceived(CmdEnums.CMD_ID cmdId) {
+        Log.d(TAG,"onCmdReceived---CMD_ID:"+cmdId);
+        switch (cmdId) {
+          case BT_ON_KEY_HEADSET_P -> {
+            Log.d(TAG, "--- BT_ON_KEY_HEADSET_P ---");
+            updateKeyButtonStatus("BT_ON_KEY_HEADSET_P");
+          }
+          case BT_ON_KEY_HEADSET_2P -> {
+            Log.d(TAG, "--- BT_ON_KEY_HEADSET_2P ---");
+            updateKeyButtonStatus("BT_ON_KEY_HEADSET_2P");
+          }
+          case BT_ON_KEY_HEADSET_3P -> {
+            Log.d(TAG, "--- BT_ON_KEY_HEADSET_3P ---");
+            updateKeyButtonStatus("BT_ON_KEY_HEADSET_3P");
+          }
+          case BT_ON_KEY_HEADSET_HOLD -> {
+            Log.d(TAG, "--- BT_ON_KEY_HEADSET_HOLD ---");
+            updateKeyButtonStatus("BT_ON_KEY_HEADSET_HOLD");
+          }
+          case BT_ON_KEY_HEADSET_UP -> {
+            Log.d(TAG, "--- BT_ON_KEY_HEADSET_UP ---");
+            updateKeyButtonStatus("BT_ON_KEY_HEADSET_UP");
+          }
         }
+      }
+
+      @Override
+      public void onBTVersionReceived(String s) {
+
+      }
     };
 
     private IBleDeviceCallback mCb = new BleDeviceCallbackImpNull(){

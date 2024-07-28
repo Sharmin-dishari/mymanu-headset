@@ -30,7 +30,7 @@
       android:exported="false" />
     <activity
       android:name=".EsimManagerActivity"
-      android:exported="false" />
+      android:exported="false"/>
     <activity
       android:name=".BluetoothButton"
       android:exported="true" />

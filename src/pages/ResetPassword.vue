@@ -8,39 +8,24 @@
       >
         <q-icon name="arrow_back" size="md" />
       </div>
-      <div class="q-px-md row flex-center text-h6">Sign up</div>
+      <div class="q-px-md row flex-center text-h6">Password Reset</div>
     </div>
     <q-form @submit="signUp" style="max-width: 450px; margin: 0 auto">
       <q-card-section>
         <div>
+          <div class="q-mb-md">Please enter OTP and password</div>
           <q-input
-            v-model="form.name"
+            v-model="form.otp"
             class="required"
             stack-label
             outlined
-            placeholder="Enter your name"
+            placeholder="Enter your OTP"
             type="text"
             clearable
             clear-icon="close"
-            :rules="[(val) => !!val || 'Name is required']"
+            :rules="[(val) => !!val]"
           >
             <template #prepend> <q-icon name="person_outline" /></template>
-          </q-input>
-          <q-input
-            v-model="form.email"
-            class="required q-my-md"
-            stack-label
-            outlined
-            placeholder="Enter your email"
-            type="email"
-            clearable
-            clear-icon="close"
-            :rules="[
-              (val) => !!val || 'Email is required',
-              (val) => validateEmail(val) || 'Type a valid Email',
-            ]"
-          >
-            <template #prepend> <q-icon name="email" /></template>
           </q-input>
           <q-input
             v-model="form.password"
@@ -94,7 +79,7 @@
         <div class="text-center q-py-md">
           <q-btn class="book-btn" rounded type="submit">
             <div class="row text-white">
-              <div class="q-mt-xs text-bold">Sign Up</div>
+              <div class="q-mt-xs text-bold">Reset Password</div>
               <div class="q-ml-md">
                 <q-btn
                   round
@@ -125,12 +110,14 @@
 import { useCounterStore } from "../stores/example-store";
 import { ref } from "vue";
 import { useQuasar } from "quasar";
-import { useRouter } from "vue-router";
+import { useRouter, useRoute } from "vue-router";
 const confirm_password = ref(true);
 const isPwd = ref(true);
+const router = useRouter();
+const route = useRoute();
 const form = ref({
-  email: "",
-  name: "",
+  email: route.query.email,
+  otp: "",
   password: "",
   confirm_password: "",
   application_type: "2",
@@ -139,7 +126,7 @@ const form = ref({
   device_type: "1",
 });
 const $q = useQuasar();
-const router = useRouter();
+
 const commonStore = useCounterStore();
 const emailValidationRegex =
   /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -148,7 +135,7 @@ const validateEmail = (val) => {
 };
 
 const signUp = async () => {
-  const res = await commonStore.UserRegister(form.value);
+  const res = await commonStore.ResetPassword(form.value);
   $q.notify({
     message: res.data.message,
     icon: "announcement",
@@ -156,10 +143,11 @@ const signUp = async () => {
   });
   form.value = {
     email: "",
-    name: "",
+    otp: "",
     password: "",
     confirm_password: "",
   };
+  router.push({ name: "sign-index" });
 };
 </script>
 

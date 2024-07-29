@@ -1,5 +1,5 @@
 <template>
-  <q-page class="bg-grey-2">
+  <q-page class="bg-grey-2" style="padding-bottom: 70px">
     <q-header class="bg-grey-2 text-black q-pa-md"></q-header>
     <div class="text-h4 q-px-md text-center text-bold text-black">
       Explore Premium

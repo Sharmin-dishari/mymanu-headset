@@ -206,7 +206,7 @@ const handleForgotPassword = async () => {
     color: "green",
     icon: "announcement",
   });
-  if (res.data.message === "OTP for forgot password has been sent to email") {
+  if (res.data.status === true) {
     router.push({ name: "reset-password", query: { email: userEmail.value } });
   }
   showModal.value = false;

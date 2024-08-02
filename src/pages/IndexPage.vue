@@ -1,64 +1,87 @@
 <template>
   <q-page class="bg-grey-2" style="padding-bottom: 70px">
     <q-header class="bg-grey-2 text-black q-pa-md"></q-header>
+
     <div class="text-h4 q-px-md text-center text-bold text-black">
       Explore Premium
     </div>
     <div class="text-h4 q-px-md text-center text-bold text-red">Sounds</div>
-    <div class="flex flex-center q-mt-md">
-      <q-img width="300px" src="/sounds.png" />
+    <div
+      v-if="loading"
+      style="
+        height: 70vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      "
+    >
+      <q-spinner-grid color="purple-4" size="3em" />
     </div>
-    <div class="">
-      <div class="scroll-wrapper" v-if="eventList.length > 1">
-        <div class="horizontal-scroll-container">
-          <div
-            v-for="item in eventList"
-            :key="item.id"
-            @click="(showImage = true), (selectedImage = item.eventImg)"
-          >
-            <q-card class="option q-ma-md art-event-gallery">
-              <q-img
-                :src="item.eventImg"
-                alt="Snow"
-                style="border-radius: 20px; max-width: 450px"
-              />
-              <q-card-section>
-                <div class="text-h6 text-bold">Mymanu CLIK Pro</div>
-                <div class="text-subtitle2 text-grey">Mymanu CLIK S</div>
-              </q-card-section>
-            </q-card>
+    <div v-else>
+      <div class="flex flex-center q-mt-md">
+        <q-img width="300px" src="/sounds.png" />
+      </div>
+      <div class="">
+        <div class="scroll-wrapper" v-if="eventList.length > 1">
+          <div class="horizontal-scroll-container">
+            <div
+              v-for="item in eventList"
+              :key="item.id"
+              @click="(showImage = true), (selectedImage = item.eventImg)"
+            >
+              <q-card class="option q-ma-md art-event-gallery">
+                <q-img
+                  :src="item.eventImg"
+                  alt="Snow"
+                  style="border-radius: 20px; max-width: 450px"
+                />
+                <q-card-section>
+                  <div class="text-h6 text-bold">{{ item.eventTitle }}</div>
+                  <div class="text-subtitle2 text-black ellipsis">
+                    {{ item.eventSummary.substring(0, 30) }}...
+                  </div>
+                  <q-tooltip class="bg-purple-5">
+                    <div>{{ item.eventSummary }}</div>
+                  </q-tooltip>
+                </q-card-section>
+              </q-card>
+            </div>
           </div>
         </div>
-      </div>
-      <div v-else class="scroll-wrapper">
-        <div class="horizontal-scroll-container container">
-          <div
-            v-for="item in eventList"
-            :key="item.id"
-            @click="(showImage = true), (selectedImage = item.eventImg)"
-          >
-            <q-card class="option q-ma-md art-event-gallery-single">
-              <q-img
-                :src="item.eventImg"
-                alt="Snow"
-                style="border-radius: 20px; width: 300px"
-              />
+        <div v-else class="scroll-wrapper">
+          <div class="horizontal-scroll-container container">
+            <div v-for="item in eventList" :key="item.id">
+              <q-card class="option q-ma-md art-event-gallery-single">
+                <q-img
+                  :src="item.eventImg"
+                  alt="Snow"
+                  @click="(showImage = true), (selectedImage = item.eventImg)"
+                  style="border-radius: 20px; width: 300px"
+                />
 
-              <q-card-section>
-                <div class="text-h6 text-bold text-black">Mymanu CLIK Pro</div>
-                <div class="text-subtitle2 text-black">Mymanu CLIK S</div>
-              </q-card-section>
-            </q-card>
+                <q-card-section>
+                  <div class="text-h6 text-bold text-black">
+                    {{ item.eventTitle }}
+                  </div>
+                  <div class="text-subtitle2 text-black ellipsis">
+                    {{ item.eventSummary.substring(0, 30) }}...
+                  </div>
+                  <q-tooltip class="bg-purple-5">
+                    <div>{{ item.eventSummary }}</div>
+                  </q-tooltip>
+                </q-card-section>
+              </q-card>
+            </div>
           </div>
         </div>
       </div>
-    </div>
-    <div class="q-px-md text-black text-h6">Recommended Tutorial</div>
-    <div class="q-pa-md">
-      <VideoIndex
-        v-if="videoList.length"
-        :video-list="videoList[0].videolist"
-      />
+      <div class="q-px-md text-black text-h6">Recommended Tutorial</div>
+      <div class="q-pa-md">
+        <VideoIndex
+          v-if="videoList.length"
+          :video-list="videoList[0].videolist"
+        />
+      </div>
     </div>
     <q-page-sticky position="bottom" :offset="[18, 0]">
       <q-card-actions class="q-pt-none" align="center">
@@ -167,18 +190,18 @@ const selectedImage = ref(null);
 const addDevice = ref(false);
 const maximized = ref(false);
 const showImage = ref(false);
+const loading = ref(false);
 const eventList = ref([]);
 const videoList = ref([]);
-onMounted(() => {
+onMounted(async () => {
+  loading.value = true;
   const catsRef = collection(db, "RSVPEvents");
-  const appliedbookings = collection(db, "booking");
-  onSnapshot(catsRef, (snapshot) => {
+  await onSnapshot(catsRef, (snapshot) => {
     eventList.value = [];
     snapshot.docs.forEach((doc) => {
       eventList.value.push({ ...doc.data(), id: doc.id });
     });
   });
-
   const videos = collection(db, "NewsnFeedvideo");
   videoList.value = [];
   onSnapshot(videos, (snapshot) => {
@@ -186,6 +209,9 @@ onMounted(() => {
       videoList.value.push({ ...doc.data(), id: doc.id });
     });
   });
+  setTimeout(() => {
+    loading.value = false;
+  }, 1000);
 });
 </script>
 

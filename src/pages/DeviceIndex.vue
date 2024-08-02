@@ -49,7 +49,7 @@
       <img
         class="q-mt-md"
         src="/earbuds.png"
-        style="transform: rotate(0deg); max-width: 550px"
+        style="transform: rotate(0deg); max-width: 550px; height: 250px"
       />
     </div>
     <div style="border-radius: 10px; background-color: #f5f5f5" class="q-ma-sm">

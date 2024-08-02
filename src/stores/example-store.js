@@ -1,6 +1,6 @@
 import { defineStore } from "pinia";
 import Api from "./Api";
-import { LocalStorage } from "quasar";
+import { LocalStorage, Notify } from "quasar";
 export const useCounterStore = defineStore("user-auth", {
   state: () => ({
     userProfile: null,
@@ -48,7 +48,12 @@ export const useCounterStore = defineStore("user-auth", {
     },
     logout() {
       this.$reset(); // Reset the state of the store
-      LocalStorage.remove("userInfo"); // Remove the persisted user info from LocalStorage
+      LocalStorage.remove("userInfo");
+      Notify.create({
+        message: "Logout Succesfully",
+        icon: "announcement",
+        color: "green",
+      }); // Remove the persisted user info from LocalStorage
     },
   },
   persist: {

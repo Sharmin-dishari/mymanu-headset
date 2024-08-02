@@ -53,7 +53,18 @@
           </q-input>
         </div>
       </q-card-section>
-      <q-card-section class="q-pt-none q-my-none" align="right">
+      <q-card-section class="q-py-none" align="right">
+        <div class="row justify-end">
+          <q-toggle
+            size="md"
+            @update:model-value="handleRemember"
+            v-model="rememberMe"
+            val="dark"
+          />
+          <div class="q-mt-sm">Remember Me</div>
+        </div>
+      </q-card-section>
+      <q-card-section class="q-pt-none q-my-none cursor-pointer" align="right">
         Forgot password?
         <q-btn
           flat
@@ -160,7 +171,8 @@
 
 <script setup>
 import { useCounterStore } from "../stores/example-store";
-import { ref } from "vue";
+import { ref, onMounted } from "vue";
+import { LocalStorage } from "quasar";
 import { useRouter } from "vue-router";
 import { useQuasar } from "quasar";
 const $q = useQuasar();
@@ -177,9 +189,16 @@ const form = ref({
   password: "",
 });
 
-const isRemember = ref(true);
+const rememberMe = ref(true);
 const userEmail = ref(null);
 const handleLogin = async () => {
+  if (rememberMe.value) {
+    LocalStorage.setItem("email", form.value.email);
+    LocalStorage.setItem("password", form.value.password);
+  } else {
+    LocalStorage.removeItem("email");
+    LocalStorage.removeItem("password");
+  }
   const res = await commonStore.userLogin(form.value);
   if (commonStore.userProfile?.length) {
     $q.notify({
@@ -196,6 +215,24 @@ const handleLogin = async () => {
     });
   }
 };
+const handleRemember = () => {
+  if (!rememberMe.value) {
+    LocalStorage.setItem("email", form.value.email);
+    LocalStorage.setItem("password", form.value.password);
+  } else {
+    LocalStorage.removeItem("email");
+    LocalStorage.removeItem("password");
+  }
+};
+onMounted(() => {
+  const rememberedUserEmail = LocalStorage.getItem("email");
+  const rememberedPassword = LocalStorage.getItem("password");
+
+  if (rememberedUserEmail && rememberedPassword) {
+    form.value.email = rememberedUserEmail;
+    form.value.password = rememberedPassword;
+  }
+});
 const handleForgotPassword = async () => {
   const res = await commonStore.ForgotPassword({ email: userEmail.value });
   console.log(res);

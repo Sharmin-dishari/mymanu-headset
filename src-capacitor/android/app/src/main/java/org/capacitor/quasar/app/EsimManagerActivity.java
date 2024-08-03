@@ -6,6 +6,7 @@ import android.Manifest;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothSocket;
 import android.content.Context;
@@ -31,6 +32,8 @@ import android.widget.RelativeLayout;
 import android.widget.Switch;
 import android.widget.Toast;
 
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatTextView;
@@ -86,6 +89,7 @@ import javax.net.ssl.TrustManagerFactory;
 public class EsimManagerActivity extends AppCompatActivity implements View.OnClickListener {
     private static final String TAG = "EsimManagerActivity";
     private static final int REQUEST_BLUETOOTH_PERMISSIONS = 1;
+    private ActivityResultLauncher<Intent> enableBtLauncher;
 
     private LinearLayout mlinear_show,mlinear_btn;
     private FloatingActionButton addCard;
@@ -105,6 +109,22 @@ public class EsimManagerActivity extends AppCompatActivity implements View.OnCli
         if (!checkBluetoothPermissions()) {
           requestBluetoothPermissions();
         }
+
+
+        // Initialize ActivityResultLauncher for enabling Bluetooth
+        enableBtLauncher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), result -> {
+          if (result.getResultCode() == RESULT_OK) {
+            if (mSppClient.getSppState() == STATE_CONNECTED) {
+              mSppClient.disconnect();
+            } else {
+              // 打开蓝牙后,打开蓝牙选择界面
+              SppScanActivity.selectBtSpp(this);
+            }
+          } else {
+            Toast.makeText(this, "Bluetooth is required to continue", Toast.LENGTH_SHORT).show();
+            checkBluetoothAndProceed();
+          }
+        });
 
         mlinear_show = findViewById(R.id.linear_show);
         mlinear_btn = findViewById(R.id.linear_btn);
@@ -225,17 +245,29 @@ public class EsimManagerActivity extends AppCompatActivity implements View.OnCli
         }
     }
 
+  private void checkBluetoothAndProceed() {
+    BluetoothAdapter bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
+    if (bluetoothAdapter == null) {
+      Toast.makeText(this, "Device doesn't support Bluetooth", Toast.LENGTH_SHORT).show();
+      finish(); // Exit the activity if Bluetooth is not supported
+    } else if (!bluetoothAdapter.isEnabled()) {
+      Intent enableBtIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
+      enableBtLauncher.launch(enableBtIntent);
+    } else {
+      if (mSppClient.getSppState() == STATE_CONNECTED) {
+        mSppClient.disconnect();
+      } else {
+        // 打开蓝牙后,打开蓝牙选择界面
+        SppScanActivity.selectBtSpp(this);
+      }
+    }
+  }
 
     @Override
     public void onClick(View view) {
       int id = view.getId();
       if (id == R.id.btn_connect) {
-        if (mSppClient.getSppState() == STATE_CONNECTED) {
-          mSppClient.disconnect();
-        } else {
-          // 打开蓝牙后,打开蓝牙选择界面
-          SppScanActivity.selectBtSpp(this);
-        }
+        checkBluetoothAndProceed();
       } else if (id == R.id.rlBack) {
         finish();
       } else if (id == R.id.addCard) {

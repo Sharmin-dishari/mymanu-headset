@@ -1,4 +1,4 @@
-package org.capacitor.quasar.app;
+package com.mymanu.companionapp;
 
 import android.os.Bundle;
 
@@ -8,6 +8,7 @@ public class MainActivity extends BridgeActivity {
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     registerPlugin(EsimPlugin.class);
+    registerPlugin(UpgradeFirmwarePlugin.class);
     super.onCreate(savedInstanceState);
   }
 

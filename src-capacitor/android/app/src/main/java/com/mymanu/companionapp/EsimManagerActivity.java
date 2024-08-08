@@ -1,4 +1,4 @@
-package org.capacitor.quasar.app;
+package com.mymanu.companionapp;
 
 import static com.kfree.btspp.BtSppBase.BT_SPP_STATE.STATE_CONNECTED;
 

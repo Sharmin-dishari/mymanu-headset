@@ -1,4 +1,4 @@
-package org.capacitor.quasar.app;
+package com.mymanu.companionapp;
 
 import static com.kfree.bt.BleClient2.BleScanActivity.EXTRA_BLE_DEV_ADD;
 import static com.kfree.bt.BleClient2.BleScanActivity.SEARCH_SELECT_BLE_DEV;

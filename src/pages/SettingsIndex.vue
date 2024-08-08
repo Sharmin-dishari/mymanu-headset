@@ -17,11 +17,12 @@
         active-color="primary"
         indicator-color="primary"
         align="justify"
+        no-caps
         narrow-indicator
       >
-        <q-tab name="name" label="Update Name" />
-        <q-tab name="email" label="Update Email" />
-        <q-tab name="password" label="Update Password" />
+        <q-tab name="name" label="Update Name" no-caps />
+        <q-tab name="email" label="Update Email" no-caps />
+        <q-tab name="password" label="Update Password" no-caps />
       </q-tabs>
 
       <q-separator />

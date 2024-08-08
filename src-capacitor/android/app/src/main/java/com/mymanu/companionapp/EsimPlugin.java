@@ -1,4 +1,4 @@
-package org.capacitor.quasar.app;
+package com.mymanu.companionapp;
 
 import android.content.Intent;
 

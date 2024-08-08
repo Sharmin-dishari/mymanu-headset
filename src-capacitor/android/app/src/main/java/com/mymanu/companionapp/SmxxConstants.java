@@ -14,7 +14,7 @@
  * *
  **********************************************************************************************************************/
 
-package org.capacitor.quasar.app;
+package com.mymanu.companionapp;
 
 /**
  * @author mbaharsyah

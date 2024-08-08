@@ -79,7 +79,7 @@
               <div
                 class="row justify-between"
                 style="width: 100%"
-                @click="handleNativeAndroidCode"
+                @click="handleEsimConfiguration"
               >
                 <div class="q-ma-xs q-mb-lg row">
                   <q-btn square class="btnBorder" color="grey-2" unelevated>
@@ -110,12 +110,12 @@
 </template>
 <script setup>
 import QFooter from "../components/QFooter.vue";
-import Esim from "boot/EchoPlugin";
+import Esim from "src/boot/EsimPlugin";
 import { useCounterStore } from "../stores/example-store";
 import { useRouter } from "vue-router";
 
-const handleNativeAndroidCode = async () => {
-  console.log("Alamin Debugging: handleNativeAndroidCode called");
+const handleEsimConfiguration = async () => {
+  console.log("Alamin Debugging: handleEsimConfiguration called");
   const { value } = await Esim.openEsimActivity({
     value: "Hello Debasish Roy....!\nWelcome to new esim configuration...",
   });

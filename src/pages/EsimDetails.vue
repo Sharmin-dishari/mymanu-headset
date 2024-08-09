@@ -19,15 +19,15 @@
     </q-header>
     <div class="q-mt-md">
       <q-card class="q-ma-md border-card" v-for="item in 3" :key="item">
-        <q-card-section>
+        <q-card-section class="">
           <div class="row justify-between">
-            <div class="q-ma-xs q-mb-lg row">
+            <div class="q-ma-xs q-mb-sm row">
               <div>
                 <q-btn square class="btnBorder" color="red" unelevated outline>
                   <q-icon name="card_membership" />
                 </q-btn>
               </div>
-              <div class="q-ml-md">
+              <div class="q-ml-md q-mt-sm">
                 <div>01714200080</div>
               </div>
             </div>
@@ -108,7 +108,7 @@
             </div>
           </div>
         </q-card-section>
-        <q-card-section>
+        <q-card-section class="q-py-none">
           <q-card bordered flat class="border-card">
             <div class="row justify-between q-px-md">
               <q-card-section class="q-px-none">

@@ -110,7 +110,7 @@
         </div>
       </q-card-actions>
     </q-page-sticky>
-    <q-dialog v-model="addDevice" persistent>
+    <!-- <q-dialog v-model="addDevice" persistent>
       <q-card class="bg-grey-2">
         <q-card-section class="text-center text-h6">
           List of Devices
@@ -153,7 +153,7 @@
           <q-btn label="Add" class="q-px-xl" color="red" rounded no-caps />
         </q-card-actions>
       </q-card>
-    </q-dialog>
+    </q-dialog> -->
     <q-dialog v-model="showImage">
       <q-card
         :class="{
@@ -177,6 +177,7 @@
 
 <script setup>
 import EventCard from "../components/EventCard.vue";
+import { useRouter } from "vue-router";
 import { ref, onMounted } from "vue";
 import { db, collection } from "src/stores/firebase.js";
 import { onSnapshot } from "firebase/firestore";
@@ -186,15 +187,19 @@ import {
   requestBluetoothPermissions,
   scanForDevices,
 } from "src/services/bluetoothService"; // Import your Bluetooth service
-
+const router = useRouter();
 const selectedImage = ref(null);
 const addDevice = ref(false);
 const maximized = ref(false);
 const showImage = ref(false);
-const showModal = ref(false); // Add this line
+const showModal = ref(false);
 const loading = ref(false);
 const eventList = ref([]);
 const videoList = ref([]);
+const handleAddBluetooth = () => {
+  router.push({ name: "device-index" });
+  checkBluetoothStatus();
+};
 onMounted(async () => {
   loading.value = true;
   const catsRef = collection(db, "RSVPEvents");

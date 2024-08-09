@@ -8,7 +8,7 @@ public class MainActivity extends BridgeActivity {
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     registerPlugin(EsimPlugin.class);
-    registerPlugin(UpgradeFirmwarePlugin.class);
+    // registerPlugin(UpgradeFirmwarePlugin.class);
     super.onCreate(savedInstanceState);
   }
 

@@ -53,8 +53,8 @@
       />
     </div>
     <div style="border-radius: 10px; background-color: #f5f5f5" class="q-ma-sm">
-      <div class="row q-pa-md q-gutter-x-md q-pt-lg justify-between">
-        <q-card class="mycard q-pa-sm">
+      <div class="row q-pa-md q-gutter-x-md q-pt-lg justify-center">
+        <!-- <q-card class="mycard q-pa-sm">
           <div class="row justify-between" @click="handleUpdateFirmware">
             <div class="q-ma-xs q-mb-lg">
               <q-btn square class="btnBorder" color="grey-2" unelevated>
@@ -145,7 +145,7 @@
 <script setup>
 import QFooter from "../components/QFooter.vue";
 import { useCounterStore } from "../stores/example-store";
-import UpgradeFirmware from "src/boot/UpgradeFirmwarePlugin";
+// import UpgradeFirmware from "src/boot/UpgradeFirmwarePlugin";
 const commonStore = useCounterStore();
 import { useRouter } from "vue-router";
 const router = useRouter();
@@ -153,15 +153,15 @@ const handleLogout = () => {
   commonStore.logout();
   router.push({ name: "sign-index" });
 };
-const handleUpdateFirmware = async () => {
-  console.log("Alamin Debugging: handleUpdateFirmware called");
-  const { value } = await UpgradeFirmware.openFirmwareActivity({
-    value:
-      "Hello Alamin ....!\nWelcome to new update firmware configuration...",
-  });
+// const handleUpdateFirmware = async () => {
+//   console.log("Alamin Debugging: handleUpdateFirmware called");
+//   const { value } = await UpgradeFirmware.openFirmwareActivity({
+//     value:
+//       "Hello Alamin ....!\nWelcome to new update firmware configuration...",
+//   });
 
-  console.log("Response from native:", value);
-};
+//   console.log("Response from native:", value);
+// };
 </script>
 
 <style>

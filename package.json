@@ -1,8 +1,8 @@
 {
-  "name": "esim",
+  "name": "mymanu_one_app",
   "version": "0.0.1",
-  "description": "An esim app",
-  "productName": "esim",
+  "description": "Mymanu one app",
+  "productName": "Mymanu one app",
   "author": "Sharmin <“sharminakter1820@gmail.com”>",
   "private": true,
   "scripts": {

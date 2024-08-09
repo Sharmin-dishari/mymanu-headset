@@ -71,7 +71,7 @@
             </div>
           </div>
           <div>Update Firmware</div>
-        </q-card>
+        </q-card> -->
         <q-card
           class="mycard q-pa-sm"
           @click="$router.push({ name: 'manage-esim' })"

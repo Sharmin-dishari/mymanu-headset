@@ -13,99 +13,102 @@
         </div>
         <div class="text-center text-h6 q-mt-xs">My Device</div>
         <div>
-          <q-btn icon="add" outline color="text-grey-6" round>
-            <q-menu>
-              <div class="bg-grey-2">
-                <q-item-section>
-                  <div class="text-center q-py-xs q-mx-xl">
-                    <q-btn class="add-btn" no-caps type="submit" unelevated>
-                      <div class="row justify-between" style="width: 100%">
-                        <div class="q-ma-xs q-mb-lg row">
-                          <q-btn
-                            square
-                            class="btnBorder"
-                            color="green-2"
-                            unelevated
-                          >
-                            <q-icon
-                              name="done"
-                              color="green"
-                              size="15px"
-                              style="border-radius: 1px solid green"
-                            />
-                          </q-btn>
-                          <div class="text-black q-mt-xs q-ml-sm">Active</div>
-                        </div>
-
-                        <div>
-                          <q-btn
-                            flat
-                            icon="navigate_next"
-                            color="black"
-                            size="md"
-                            round
-                          />
-                        </div>
-                      </div>
-                    </q-btn></div
-                ></q-item-section>
-              </div>
-              <div class="q-py-none bg-grey-2">
-                <q-item-section>
-                  <div class="text-center q-py-xs q-mx-xl">
-                    <q-btn class="add-btn" no-caps type="submit" unelevated>
-                      <div class="row justify-between" style="width: 100%">
-                        <div class="q-ma-xs q-mb-lg row">
-                          <q-btn
-                            square
-                            class="btnBorder"
-                            color="red-2"
-                            unelevated
-                          >
-                            <q-icon name="delete" color="red" size="15px" />
-                          </q-btn>
-                          <div class="text-black q-mt-xs q-ml-sm">Delete</div>
-                        </div>
-
-                        <div>
-                          <q-btn
-                            flat
-                            icon="navigate_next"
-                            color="black"
-                            size="md"
-                            round
-                          />
-                        </div>
-                      </div>
-                    </q-btn></div
-                ></q-item-section>
-              </div>
-            </q-menu>
-          </q-btn>
+          <!-- <q-btn icon="add" outline color="text-grey-6" round> </q-btn> -->
         </div>
       </div>
     </q-header>
     <div class="q-mt-md">
       <q-card class="q-ma-md border-card" v-for="item in 3" :key="item">
-        <q-card-section>
+        <q-card-section class="">
           <div class="row justify-between">
-            <div class="q-ma-xs q-mb-lg row">
+            <div class="q-ma-xs q-mb-sm row">
               <div>
                 <q-btn square class="btnBorder" color="red" unelevated outline>
                   <q-icon name="card_membership" />
                 </q-btn>
               </div>
-              <div class="q-ml-md">
+              <div class="q-ml-md q-mt-sm">
                 <div>01714200080</div>
-                <div>T-mobile</div>
               </div>
             </div>
             <div>
-              <q-btn icon="more_vert" flat />
+              <q-btn icon="more_vert" flat>
+                <q-menu>
+                  <div class="bg-grey-2">
+                    <q-item-section>
+                      <div class="text-center q-py-xs q-mx-xl">
+                        <q-btn class="add-btn" no-caps type="submit" unelevated>
+                          <div class="row justify-between" style="width: 100%">
+                            <div class="q-ma-xs q-mb-lg row">
+                              <q-btn
+                                square
+                                class="btnBorder"
+                                color="green-2"
+                                unelevated
+                              >
+                                <q-icon
+                                  name="done"
+                                  color="green"
+                                  size="15px"
+                                  style="border-radius: 1px solid green"
+                                />
+                              </q-btn>
+                              <div class="text-black q-mt-xs q-ml-sm">
+                                Active
+                              </div>
+                            </div>
+
+                            <div>
+                              <q-btn
+                                flat
+                                icon="navigate_next"
+                                color="black"
+                                size="md"
+                                round
+                              />
+                            </div>
+                          </div>
+                        </q-btn></div
+                    ></q-item-section>
+                  </div>
+                  <div class="q-py-none bg-grey-2">
+                    <q-item-section>
+                      <div class="text-center q-py-xs q-mx-xl">
+                        <q-btn class="add-btn" no-caps type="submit" unelevated>
+                          <div class="row justify-between" style="width: 100%">
+                            <div class="q-ma-xs q-mb-lg row">
+                              <q-btn
+                                square
+                                class="btnBorder"
+                                color="red-2"
+                                unelevated
+                              >
+                                <q-icon name="delete" color="red" size="15px" />
+                              </q-btn>
+                              <div class="text-black q-mt-xs q-ml-sm">
+                                Delete
+                              </div>
+                            </div>
+
+                            <div>
+                              <q-btn
+                                flat
+                                icon="navigate_next"
+                                color="black"
+                                size="md"
+                                round
+                              />
+                            </div>
+                          </div>
+                        </q-btn></div
+                    ></q-item-section>
+                  </div>
+                </q-menu>
+              </q-btn>
             </div>
           </div>
         </q-card-section>
-        <q-card-section>
+        <q-card-section class="q-py-none">
           <q-card bordered flat class="border-card">
             <div class="row justify-between q-px-md">
               <q-card-section class="q-px-none">

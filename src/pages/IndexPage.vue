@@ -30,10 +30,11 @@
               @click="(showImage = true), (selectedImage = item.eventImg)"
             >
               <q-card class="option q-ma-md art-event-gallery">
-                <q-img
+                <img
                   :src="item.eventImg"
                   alt="Snow"
-                  style="border-radius: 20px; max-width: 450px"
+                  @click="(showImage = true), (selectedImage = item.eventImg)"
+                  style="border-radius: 20px; max-width: 450px; height: 200px"
                 />
                 <q-card-section>
                   <div class="text-h6 text-bold">{{ item.eventTitle }}</div>
@@ -51,15 +52,15 @@
         <div v-else class="scroll-wrapper">
           <div class="horizontal-scroll-container container">
             <div v-for="item in eventList" :key="item.id">
-              <q-card class="option q-ma-md art-event-gallery-single">
-                <q-img
+              <q-card class="option q-pa-none q-ma-sm art-event-gallery-single">
+                <img
                   :src="item.eventImg"
                   alt="Snow"
                   @click="(showImage = true), (selectedImage = item.eventImg)"
-                  style="border-radius: 20px; width: 300px"
+                  style="border-radius: 20px; width: 300px; height: 200px"
                 />
 
-                <q-card-section>
+                <q-card-section class="q-pa-none">
                   <div class="text-h6 text-bold text-black">
                     {{ item.eventTitle }}
                   </div>
@@ -86,7 +87,7 @@
     <q-page-sticky position="bottom" :offset="[18, 0]">
       <q-card-actions class="q-pt-none" align="center">
         <div class="text-center q-py-md">
-          <q-btn class="book-btn q-mt-lg" no-caps @click="addDevice = true">
+          <q-btn class="book-btn q-mt-lg" no-caps @click="handleAddBluetooth">
             <div class="row text-white">
               <div class="q-mt-xs text-subtitle1 text-weight-medium">
                 Add a device
@@ -147,14 +148,7 @@
             rounded
             v-close-popup
           />
-          <q-btn
-            label="Add"
-            @click="$router.push({ name: 'device-index' })"
-            class="q-px-xl"
-            color="red"
-            rounded
-            no-caps
-          />
+          <q-btn label="Add" class="q-px-xl" color="red" rounded no-caps />
         </q-card-actions>
       </q-card>
     </q-dialog>
@@ -185,6 +179,8 @@ import { ref, onMounted } from "vue";
 import { db, collection } from "src/stores/firebase.js";
 import { onSnapshot } from "firebase/firestore";
 import VideoIndex from "../components/VideoIndex.vue";
+import { useRouter } from "vue-router";
+const router = useRouter();
 // const videoList = ref(["https://www.youtube.com/embed/k3_tw44QsZQ?rel=0"]);
 const selectedImage = ref(null);
 const addDevice = ref(false);
@@ -193,6 +189,9 @@ const showImage = ref(false);
 const loading = ref(false);
 const eventList = ref([]);
 const videoList = ref([]);
+const handleAddBluetooth = () => {
+  router.push({ name: "device-index" });
+};
 onMounted(async () => {
   loading.value = true;
   const catsRef = collection(db, "RSVPEvents");

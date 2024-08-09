@@ -53,8 +53,8 @@
       />
     </div>
     <div style="border-radius: 10px; background-color: #f5f5f5" class="q-ma-sm">
-      <div class="row q-pa-md q-gutter-x-md q-pt-lg justify-between">
-        <q-card class="mycard q-pa-sm">
+      <div class="row q-pa-md q-gutter-x-md q-pt-md justify-center">
+        <!-- <q-card class="mycard q-pa-sm">
           <div class="row justify-between">
             <div class="q-ma-xs q-mb-lg">
               <q-btn square class="btnBorder" color="grey-2" unelevated>
@@ -71,7 +71,7 @@
             </div>
           </div>
           <div>Update Firmware</div>
-        </q-card>
+        </q-card> -->
         <q-card
           class="mycard q-pa-sm"
           @click="$router.push({ name: 'manage-esim' })"

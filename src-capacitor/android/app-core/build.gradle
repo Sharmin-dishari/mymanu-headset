@@ -1,0 +1,67 @@
+/*
+ * ************************************************************************************************
+ * * © 2020-2022 Qualcomm Technologies, Inc. and/or its subsidiaries. All rights reserved.        *
+ * ************************************************************************************************
+ */
+
+plugins {
+    id 'com.android.library'
+    id 'kotlin-android'
+    id 'kotlin-parcelize'
+}
+
+// get app version
+def app_version = getProperties('version.properties')
+def version_code = app_version['VERSION_CODE'].toInteger()
+def version_name = app_version['VERSION_MAJOR'] + "." + app_version['VERSION_MINOR'] + "." + app_version['VERSION_CODE']
+
+android {
+    compileSdkVersion 34
+
+    namespace 'com.mymanu.companionapp.core'
+
+    defaultConfig {
+        minSdkVersion 22
+        targetSdkVersion 34
+        versionCode version_code
+        versionName version_name
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+}
+
+dependencies {
+    // Public libraries
+    implementation "androidx.appcompat:appcompat:1.7.0"
+
+    // Modules
+    implementation project(':lib-upgrade')
+}
+
+/**
+ * Load the given file as properties.
+ *
+ * @return a Properties object which contains the properties from the given file path.
+ */
+def getProperties(String filePath) {
+    def propertiesFile = file(filePath)
+
+    if (propertiesFile.canRead()) {
+        Properties properties = new Properties()
+        FileInputStream file = new FileInputStream(propertiesFile)
+        properties.load(file)
+        file.close()
+        return properties
+    } else {
+        throw new GradleException("getProperties(): could not read " + filePath)
+    }
+}

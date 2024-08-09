@@ -5,12 +5,32 @@
     <color name="purple_700">#FF3700B3</color>
     <color name="teal_200">#FF03DAC5</color>
     <color name="teal_700">#FF018786</color>
-    <color name="black">#FF000000</color>
-    <color name="white">#FFFFFFFF</color>
+<!--    <color name="black">#FF000000</color>-->
+<!--    <color name="white">#FFFFFFFF</color>-->
 
     <color name="colorPrimary">#ED0F37</color>
     <color name="colorPrimaryDark">#C10015</color>
     <color name="colorAccent">#C10015</color>
+
+    <color name="colorToolbar">@color/qualcomm_blue</color>
+    <color name="colorOnToolbar">@color/white</color>
+
+    <color name="text_high_emphasis">@color/text_high_emphasis_on_light</color>
+    <color name="text_medium_emphasis">@color/text_medium_emphasis_on_light</color>
+    <color name="text_light_emphasis">@color/text_light_emphasis_on_light</color>
+    <color name="title_high_emphasis">@color/text_high_emphasis_on_light</color>
+    <color name="title_medium_emphasis">@color/text_medium_emphasis_on_light</color>
+
+
+  <!--    <color name="text_high_emphasis">@color/text_high_emphasis_on_light</color>-->
+<!--    <color name="text_medium_emphasis">@color/text_medium_emphasis_on_light</color>-->
+<!--    <color name="text_light_emphasis">@color/text_light_emphasis_on_light</color>-->
+<!--    <color name="title_high_emphasis">@color/text_high_emphasis_on_light</color>-->
+<!--    <color name="title_medium_emphasis">@color/text_medium_emphasis_on_light</color>-->
+
+    <!-- Components -->
+    <color name="progress">@color/colorAccent</color>
+    <color name="progress_background">@color/qualcomm_blue_light_4</color>
 
     <color name="editTextHeader">#383838</color>
     <color name="editTextContent">#757575</color>

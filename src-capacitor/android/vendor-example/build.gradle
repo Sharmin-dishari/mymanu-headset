@@ -1,0 +1,40 @@
+/*
+ * ************************************************************************************************
+ * * © 2020-2022 Qualcomm Technologies, Inc. and/or its subsidiaries. All rights reserved.        *
+ * ************************************************************************************************
+ */
+
+// default build file that includes Java 1.8 compatibility
+
+apply plugin: 'com.android.library'
+
+android {
+    compileSdkVersion 34
+
+    namespace 'com.mymanu.companionapp.vendor.example'
+
+    defaultConfig {
+        minSdkVersion 22
+        targetSdkVersion 34
+        versionCode 1
+        versionName "1.0"
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt')
+        }
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation 'androidx.appcompat:appcompat:1.7.0'
+    implementation project(':app-core')
+}

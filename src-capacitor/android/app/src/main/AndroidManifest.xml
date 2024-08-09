@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:tools="http://schemas.android.com/tools"
-  xmlns:android="http://schemas.android.com/apk/res/android">
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  tools:ignore="GoogleAppIndexingWarning">
   <!-- Permissions -->
   <uses-permission android:name="android.permission.BLUETOOTH" />
   <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
@@ -14,13 +15,18 @@
   <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
   <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
+  <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
   <uses-permission android:name="android.permission.INTERNET" />
+
+  <uses-feature android:name="android.hardware.bluetooth" android:required="true" />
 
 
   <application
+    android:name=".Applicat"
     android:allowBackup="true"
     android:icon="@mipmap/ic_launcher"
     android:label="@string/app_name"
+    android:networkSecurityConfig="@xml/network_security_config"
     android:roundIcon="@mipmap/ic_launcher_round"
     android:supportsRtl="true"
     android:theme="@style/AppTheme"
@@ -49,15 +55,23 @@
       </intent-filter>
     </activity>
 
+
+
+    <activity
+      android:name=".ui.UpdateActivity"
+      android:exported="true">
+    </activity>
+
     <provider
       android:name="androidx.core.content.FileProvider"
       android:authorities="${applicationId}.fileprovider"
-      android:exported="false"
-      android:grantUriPermissions="true">
+      android:grantUriPermissions="true"
+      android:exported="false">
       <meta-data
         android:name="android.support.FILE_PROVIDER_PATHS"
         android:resource="@xml/file_paths" />
     </provider>
+
   </application>
 
 </manifest>

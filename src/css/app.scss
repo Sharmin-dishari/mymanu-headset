@@ -1,0 +1,9 @@
+// app global css in SCSS form
+
+@font-face {
+  font-family: "Chillax";
+  src: url(/Chillax-Variable.ttf);
+}
+* {
+  font-family: Chillax;
+}

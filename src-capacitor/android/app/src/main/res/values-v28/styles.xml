@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="MaterialAlertDialogTheme" parent="ThemeOverlay.MaterialComponents.MaterialAlertDialog">
+        <item name="materialAlertDialogBodyTextStyle">
+            @style/AppTextAppearance.MaterialAlertDialog.Body
+        </item>
+        <item name="materialAlertDialogTitleTextStyle">
+            @style/AppTextAppearance.MaterialAlertDialog.Title
+        </item>
+        <item name="buttonBarPositiveButtonStyle">
+            @style/AppTextAppearance.MaterialAlertDialog.Button
+        </item>
+        <item name="buttonBarNegativeButtonStyle">
+            @style/AppTextAppearance.MaterialAlertDialog.Button
+        </item>
+        <item name="buttonBarNeutralButtonStyle">
+            @style/AppTextAppearance.MaterialAlertDialog.Button
+        </item>
+    </style>
+</resources>

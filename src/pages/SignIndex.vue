@@ -1,24 +1,46 @@
 <template>
-  <q-page>
+  <q-page style="background: #9e9e9e26" class="q-pt-lg">
     <div class="row flex-center q-pt-lg"></div>
+    <div align="right">
+      <q-btn
+        label="SIGN UP"
+        class="text-red-7 text-bold q-py-sm bg-white q-mr-md"
+        style="font-size: 12px"
+        outlined
+        @click="$router.push({ name: 'sign-up' })"
+        rounded
+      />
+    </div>
     <div
-      class="q-pa-md text-h6"
+      class="q-px-lg q-mt-xl q-pb-md text-h6"
       :class="$q.screen.gt.sm ? 'row flex-center' : ''"
     >
-      Sign In
+      Sign in
     </div>
-    <div class="q-px-md">Sign in with your email or user name</div>
-    <div class="q-px-md q-pb-md">Don't remember your username or password</div>
+    <div class="q-px-lg text-weight-medium text-grey-10">
+      Sign in with your email or user name.
+    </div>
+    <div class="q-px-lg q-pb-md text-weight-medium text-grey-10">
+      Don't remember your user name or password?
+    </div>
     <q-form @submit="handleLogin" style="max-width: 450px; margin: 0 auto">
-      <q-card-section class="q-py-none">
+      <div
+        class="q-px-lg text-red-7 text-weight-medium cursor-pointer"
+        @click="showModal = true"
+      >
+        Click here.
+      </div>
+      <q-card-section class="q-py-none q-mt-lg">
         <div>
           <q-input
             v-model="form.email"
             class="required q-mb-sm"
             stack-label
             outlined
+            rounded
             placeholder="Enter your email"
             type="email"
+            bg-color="white"
             clearable
             clear-icon="close"
             :rules="[
@@ -26,13 +48,14 @@
               (val) => validateEmail(val) || 'Type a valid Email',
             ]"
           >
-            <template #prepend> <q-icon name="email" /></template>
           </q-input>
           <q-input
             v-model="form.password"
             class="required q-mb-lg"
             stack-label
             outlined
+            bg-color="white"
+            rounded
             placeholder="Enter your password"
             :type="isPwd ? 'password' : 'text'"
             :rules="[
@@ -42,7 +65,6 @@
                 'Password must contain at least one lowercase letter, one uppercase letter, one digit, and one special character.',
             ]"
           >
-            <template #prepend> <q-icon name="lock" /></template>
             <template #append>
               <q-icon
                 :name="isPwd ? 'visibility' : 'visibility_off'"
@@ -53,68 +75,43 @@
           </q-input>
         </div>
       </q-card-section>
-      <q-card-section class="q-py-none" align="right">
-        <div class="row justify-end">
-          <q-toggle
-            size="md"
-            @update:model-value="handleRemember"
-            v-model="rememberMe"
-            val="dark"
-          />
-          <div class="q-mt-sm">Remember Me</div>
-        </div>
-      </q-card-section>
-      <q-card-section class="q-pt-none q-my-none cursor-pointer" align="right">
-        Forgot password?
-        <q-btn
-          flat
-          dense
-          no-caps
-          size=".9rem"
-          class="q-py-none"
-          color="primary"
-          label="Reset password"
-          @click="showModal = true"
-        />
-      </q-card-section>
-      <q-card-actions class="q-pt-none" align="center">
-        <div class="text-center q-py-md">
-          <q-btn class="book-btn" rounded type="submit">
-            <div class="row text-white">
-              <div class="q-mt-xs text-bold">Sign In</div>
-              <div class="q-ml-md">
-                <q-btn
-                  round
-                  icon="east"
-                  size="sm"
-                  text-black
-                  unelevated
-                  color="red-5"
-                  class="text-white"
-                />
-              </div>
+      <q-item class="row justify-between">
+        <q-item-section>
+          <div class="q-py-none">
+            <div class="row">
+              <q-checkbox
+                size="35px"
+                color="red-7"
+                @update:model-value="handleRemember"
+                v-model="rememberMe"
+                val="dark"
+              />
+              <div class="q-mt-sm">Remember Me</div>
             </div>
-          </q-btn>
-        </div>
-      </q-card-actions>
-    </q-form>
-    <div class="bg-color" style="max-width: 450px; margin: 0 auto">
-      <div
-        class="text-caption text-center q-py-md cursor-pointer"
-        @click="$router.push({ name: 'sign-up' })"
-      >
-        Don't have an account?
-        <span class="text-primary q-ml-sm">Sign up</span>
-      </div>
-    </div>
+          </div>
+        </q-item-section>
 
-    <div class="q-py-none" align="center">
-      <div class="text-caption text-center q-py-md cursor-pointer">
-        By signing in you are agreeing to the Terms of Service
+        <q-item-section side top>
+          <q-btn
+            label="LOGIN"
+            rounded
+            type="submit"
+            style="font-size: 12px"
+            class="bg-red-7 q-px-lg q-py-sm text-white text-weight-bold"
+          />
+        </q-item-section>
+      </q-item>
+      <q-card-actions class="q-pt-none" align="right"> </q-card-actions>
+    </q-form>
+    <div class="footer q-py-lg">
+      <div class="q-py-none" align="center">
+        <div class="text-caption text-center q-py-md cursor-pointer">
+          By signing in you are agreeing to the Terms of Service
+        </div>
       </div>
-    </div>
-    <div class="text-center">
-      <div class="text-red">Terms of use | Privacy Policy</div>
+      <div class="text-center">
+        <div class="text-red">Terms of use | Privacy Policy</div>
+      </div>
     </div>
     <q-dialog v-model="showModal">
       <q-card>
@@ -165,7 +162,6 @@
         </q-form>
       </q-card>
     </q-dialog>
-    <!-- <div class="text-center text-bold">Logged in as {{ myinfo }}</div> -->
   </q-page>
 </template>
 

@@ -1,14 +1,25 @@
 <template>
-  <q-page>
-    <div class="q-pa-md">
-      <div
-        class="cursor-pointer"
-        @click="$router.back()"
-        v-if="$q.screen.lt.sm"
-      >
-        <q-icon name="arrow_back" size="md" />
+  <q-page padding class="bg-grey-2 q-pt-xl">
+    <div class="q-mt-xl">
+      <div align="right">
+        <q-btn
+          label="SIGN IN"
+          class="text-red-7 text-bold q-py-sm q-px-lg bg-white q-mr-md"
+          style="font-size: 12px"
+          outlined
+          @click="$router.push({ name: 'sign-index' })"
+          rounded
+        />
       </div>
-      <div class="q-px-md row flex-center text-h6">Sign up</div>
+    </div>
+    <div
+      class="q-px-lg q-mt-xl q-pb-md text-h6"
+      :class="$q.screen.gt.sm ? 'row flex-center' : ''"
+    >
+      Sign up
+    </div>
+    <div class="q-px-lg text-weight-medium text-grey-10">
+      Sign up with your email address.
     </div>
     <q-form @submit="signUp" style="max-width: 450px; margin: 0 auto">
       <q-card-section>
@@ -18,20 +29,22 @@
             class="required"
             stack-label
             outlined
-            placeholder="Enter your name"
+            placeholder="Name"
+            rounded
             type="text"
+            bg-color="white"
             clearable
             clear-icon="close"
             :rules="[(val) => !!val || 'Name is required']"
-          >
-            <template #prepend> <q-icon name="person_outline" /></template>
-          </q-input>
+          />
           <q-input
             v-model="form.email"
             class="required q-my-md"
             stack-label
             outlined
-            placeholder="Enter your email"
+            rounded
+            bg-color="white"
+            placeholder="Email Address"
             type="email"
             clearable
             clear-icon="close"
@@ -39,15 +52,15 @@
               (val) => !!val || 'Email is required',
               (val) => validateEmail(val) || 'Type a valid Email',
             ]"
-          >
-            <template #prepend> <q-icon name="email" /></template>
-          </q-input>
+          />
           <q-input
             v-model="form.password"
             class="required q-my-md q-mt-md"
             stack-label
             outlined
+            rounded
             placeholder="Your password"
+            bg-color="white"
             :type="isPwd ? 'password' : 'text'"
             :rules="[
               (val) => !!val,
@@ -56,7 +69,6 @@
                 'Password must contain at least one lowercase letter, one uppercase letter, one digit, and one special character.',
             ]"
           >
-            <template #prepend> <q-icon name="lock" /></template>
             <template #append>
               <q-icon
                 :name="isPwd ? 'visibility' : 'visibility_off'"
@@ -70,6 +82,8 @@
             class="required"
             stack-label
             outlined
+            rounded
+            bg-color="white"
             placeholder="Confirm password"
             :type="confirm_password ? 'password' : 'text'"
             :rules="[
@@ -79,7 +93,6 @@
                 'Password must contain at least one lowercase letter, one uppercase letter, one digit, and one special character.',
             ]"
           >
-            <template #prepend> <q-icon name="lock" /></template>
             <template #append>
               <q-icon
                 :name="confirm_password ? 'visibility' : 'visibility_off'"
@@ -90,34 +103,35 @@
           </q-input>
         </div>
       </q-card-section>
-      <q-card-actions class="q-pt-none" align="center">
-        <div class="text-center q-py-md">
-          <q-btn class="book-btn" rounded type="submit">
-            <div class="row text-white">
-              <div class="q-mt-xs text-bold">Sign Up</div>
-              <div class="q-ml-md">
-                <q-btn
-                  round
-                  icon="east"
-                  size="sm"
-                  text-black
-                  unelevated
-                  color="red-5"
-                  class="text-white"
-                />
-              </div>
+      <q-item class="row justify-between q-pt-none">
+        <q-item-section avatar>
+          <div class="q-py-none">
+            <div class="row">
+              <q-checkbox
+                size="40px"
+                color="red-7"
+                v-model="termsCondition"
+                val="dark"
+              />
             </div>
-          </q-btn>
-        </div>
+          </div>
+        </q-item-section>
+        <q-item-section
+          ><div>
+            By createing an account you are agreeing to the Terms of Service
+          </div></q-item-section
+        >
+      </q-item>
+      <q-card-actions align="center" class="q-mt-md">
+        <q-btn
+          label="Register"
+          rounded
+          type="submit"
+          style="height: 50px"
+          class="bg-red-8 full-width text-white q-pa-md text-weight-bold"
+        />
       </q-card-actions>
     </q-form>
-    <div
-      class="text-caption text-center q-py-md cursor-pointer"
-      @click="$router.push({ name: 'sign-index' })"
-    >
-      Already have an account?
-      <span class="text-primary q-ml-sm">Signin</span>
-    </div>
   </q-page>
 </template>
 
@@ -127,6 +141,7 @@ import { ref } from "vue";
 import { useQuasar } from "quasar";
 import { useRouter } from "vue-router";
 const confirm_password = ref(true);
+const termsCondition = ref(false);
 const isPwd = ref(true);
 const form = ref({
   email: "",

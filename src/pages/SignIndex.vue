@@ -1,10 +1,10 @@
 <template>
-  <q-page style="background: #9e9e9e26" class="q-pt-lg">
-    <div class="row flex-center q-pt-lg"></div>
+  <q-page class="bg-grey-2 q-pt-xl">
+    <div class="row flex-center q-mt-xl"></div>
     <div align="right">
       <q-btn
         label="SIGN UP"
-        class="text-red-7 text-bold q-py-sm bg-white q-mr-md"
+        class="text-red-6 text-bold q-py-sm bg-white q-mr-md"
         style="font-size: 12px"
         outlined
         @click="$router.push({ name: 'sign-up' })"
@@ -25,7 +25,7 @@
     </div>
     <q-form @submit="handleLogin" style="max-width: 450px; margin: 0 auto">
       <div
-        class="q-px-lg text-red-7 text-weight-medium cursor-pointer"
+        class="q-px-lg text-red-8 text-weight-medium cursor-pointer"
         @click="showModal = true"
       >
         Click here.
@@ -81,7 +81,7 @@
             <div class="row">
               <q-checkbox
                 size="35px"
-                color="red-7"
+                color="red-8"
                 @update:model-value="handleRemember"
                 v-model="rememberMe"
                 val="dark"
@@ -97,7 +97,7 @@
             rounded
             type="submit"
             style="font-size: 12px"
-            class="bg-red-7 q-px-lg q-py-sm text-white text-weight-bold"
+            class="bg-red-8 q-px-lg q-mt-md q-py-sm text-white text-weight-bold"
           />
         </q-item-section>
       </q-item>
@@ -207,7 +207,7 @@ const handleLogin = async () => {
     $q.notify({
       message: res.data.message,
       icon: "announcement",
-      color: "red-7",
+      color: "red-8",
     });
   }
 };
